@@ -57,3 +57,12 @@ typings/
 # dotenv environment variables file
 .env
 
+dist/
+build/
+www/
+platforms/
+plugins/
+.vscode/
+/index.html
+.DS_Store
+
