@@ -14,24 +14,21 @@ export default class extends Phaser.Group {
 
   constructor (props) {
     super(props)
-    const bg = this.create(-200, this.game.world.centerY + 50, 'foreground', 'sight-1.png')
+    const bg = this.create(0, 0, 'houses', 'sight-2')
+    bg.anchor.setTo(0.5, 1)
 
-    bg.scale.setTo(0.5)
 
     // bg.inputEnabled = true
     // bg.input.enableDrag(true)
 
     this.action = new RapeMent({
       game: this.game,
-      x: -100,
-      y: 75
+      x: -50,
+      y: -280
     })
-
-    this.action.scale.setTo(1.75)
-
     bg.addChild(this.action)
 
-    this.action.x += 2000
+    // this.action.x += 2000
 
     this.action.anim['rape'].play()
     this.action.anim['rape'].onComplete.add(() => this.action.anim['rape'].play())
