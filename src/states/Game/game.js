@@ -217,7 +217,7 @@ export default class extends Phaser.State {
           this.game.world.width - 150,
           50,
           'buttonReplay',
-          () => this.state.start('EndlessWalk'))
+          () => this.state.start('Game'))
         this.buttonReplay.scale.setTo(0.5)
       })
     })
