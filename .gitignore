@@ -66,3 +66,6 @@ plugins/
 /index.html
 .DS_Store
 
+firebase.json
+.firebaserc
+
