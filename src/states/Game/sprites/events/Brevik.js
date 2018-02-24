@@ -7,12 +7,12 @@ export default class extends Phaser.Group {
 
     this.playerInteraction = new Phaser.Signal()
 
-    this.target1 = new Phaser.Point(this.game.world.centerX + 10, this.game.world.centerY + 100 - 10)
+    this.target1 = new Phaser.Point(this.game.world.centerX + 10, this.game.world.height - 100)
 
     this.neo1 = new Neo({
       game: this.game,
       x: this.game.world.width + 10,
-      y: this.game.world.centerY - 10 + 100,
+      y: this.game.world.height - 100,
       type: 1
     })
 
