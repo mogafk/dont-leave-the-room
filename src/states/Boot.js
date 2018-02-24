@@ -31,13 +31,18 @@ export default class extends Phaser.State {
     // this.load.image('buttonGreen', './assets/menu-ui/button-green.png')
 
     this.game.load.baseURL = './assets/'
-    this.game.load.atlasJSONHash('foreground', 'backgrounds/asset1.png', 'backgrounds/asset1.json')
+    // this.game.load.atlasJSONHash('foreground', 'backgrounds/asset1.png', 'backgrounds/asset1.json')
     this.game.load.atlasJSONHash('background', 'backgrounds/asset2.png', 'backgrounds/asset2.json')
     this.game.load.atlasJSONHash('houses', 'backgrounds/houses.png', 'backgrounds/houses.json')
     this.game.load.atlasJSONHash('rape', 'events/rape.png', 'events/rape.json')
-    this.game.load.image('asphalt', 'foreground.png')
-    this.game.load.spritesheet('button', 'PowerButtonsAsset.png', 62, 70, 3)
+    // this.game.load.spritesheet('button', 'PowerButtonsAsset.png', 62, 70, 3)
     this.game.load.image('buttonReplay', 'Repeat.png')
+    this.game.load.atlasJSONHash('croc', 'events/croc.png', 'events/croc.json')
+    this.game.load.atlasJSONHash('men2', 'persons/men2.png', 'persons/men2.json')
+    this.game.load.atlasJSONHash('men3', 'persons/men3.png', 'persons/men3.json')
+    this.game.load.atlasJSONHash('hero', 'persons/hero.png', 'persons/hero.json')
+    this.game.load.atlasJSONHash('neo', 'persons/neo.png', 'persons/neo.json')
+    this.game.load.atlasJSONHash('brevik', 'persons/brevik.png', 'persons/brevik.json')
   }
 
   render () {

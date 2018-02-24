@@ -1,3 +1,3 @@
-import State from './demo'
+import State from './game'
 
 export default State
