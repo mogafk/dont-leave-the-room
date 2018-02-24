@@ -44,7 +44,6 @@ export default class extends Group {
     const { asset, tiles } = this.data
     const { scale, anchor } = this.custom
     const spriteName = this.game.rnd.pick(tiles)
-    console.log(spriteName)
     const sprite = this.create(x, 0, asset, spriteName)
     sprite.scale.setTo(scale)
     sprite.anchor.setTo(anchor)
@@ -59,7 +58,6 @@ export default class extends Group {
 
   addTiles (tiles) {
     this.data.tiles = [...this.data.tiles, ...tiles]
-    console.log(this.data.tiles)
   }
 
   setSpeed (value) {
