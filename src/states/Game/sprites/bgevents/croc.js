@@ -4,21 +4,23 @@ import Animated from '.././Animated'
 export default class extends Sprite {
   constructor (props) {
     super(props)
-
+    this.activated = false
     //  синоним для X центра сцены
     const WXC = this.game.world.centerX
     //  синоним для высоты сцены
     const WYH = this.game.world.height
 
     //  добавляю задник
-    this.back = this.game.add.sprite(WXC, WYH, 'houses', 'house-1')
+    this.back = this.game.add.sprite(WXC, 0, 'houses', 'house-1')
     this.back.anchor.setTo(0.5, 1)
+
+    this.addChild(this.back)
 
     //  добавляю анимированного крокодила с анимациями lie и fly
     this.croc = new Animated({
       game: this.game,
       x: -200,
-      y: -1000,
+      y: -800,
       asset: 'croc',
       anchor: new Point(0.5, 0.5)
     })
@@ -127,6 +129,7 @@ export default class extends Sprite {
 
   //  Запуск крокодила
   play () {
+    this.activated = true
     this.startPoint.start()
     this.croc.anim['fly'].play()
   }
