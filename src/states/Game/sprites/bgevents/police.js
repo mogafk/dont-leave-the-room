@@ -5,21 +5,23 @@ import Animated from '.././Animated'
 export default class extends Sprite {
   constructor (props) {
     super(props)
-
+    this.activated = false
     //  синоним для X центра сцены
     const WXC = this.game.world.centerX
     //  синоним для высоты сцены
     const WYH = this.game.world.height
 
     //  добавляю задник
-    this.back = this.game.add.sprite(WXC, WYH, 'houses', 'police')
+    this.back = this.game.add.sprite(WXC, 0, 'houses', 'police')
     this.back.anchor.setTo(0.5, 1)
+
+    this.addChild(this.back)
 
     //  добавляю падающего человека с анимациями fall и fall_death
     this.faller = new Animated({
       game: this.game,
       x: +150,
-      y: -500,
+      y: -800,
       asset: 'men2',
       anchor: new Point(0.5, 0.5)
     })
@@ -35,7 +37,7 @@ export default class extends Sprite {
         'y': -130
       },
       2000,
-      Easing.Back.In,
+      Easing.Linear.None,
       false
       )
 
@@ -47,6 +49,7 @@ export default class extends Sprite {
   }
   //  Запуск падающего
   play () {
+    this.activated = true
     this.startPoint.start()
     this.faller.anim['fall'].play()
   }
