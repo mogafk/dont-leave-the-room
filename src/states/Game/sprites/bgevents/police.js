@@ -15,7 +15,7 @@ export default class extends Sprite {
     this.back = this.game.add.sprite(WXC, WYH, 'houses', 'police')
     this.back.anchor.setTo(0.5, 1)
 
-    //  добавляю анимированного крокодила с анимациями lie и fly
+    //  добавляю падающего человека с анимациями fall и fall_death
     this.faller = new Animated({
       game: this.game,
       x: +150,
@@ -25,10 +25,10 @@ export default class extends Sprite {
     })
     this.faller.addAnimation({name: 'fall', length: 24, loop: true})
     this.faller.addAnimation({name: 'fall_death', length: 21, speed: 90, loop: false})
-    //  привязываю крокодила к заднику
+    //  привязываю падающего человека к заднику
     this.back.addChild(this.faller)
 
-    //  Крокодил падает с крыши
+    //  человек падает с крыши
     const _p0 = this.startPoint = this.game.add
       .tween(this.faller)
       .to({
@@ -39,6 +39,8 @@ export default class extends Sprite {
       false
       )
 
+    //  когда человек закончил лететь,
+    //  включаю анимацию смерти от падения
     _p0.onComplete.add(() => {
       this.faller.anim['fall_death'].play()
     })
