@@ -10,6 +10,7 @@ export default class extends Sprite {
     scale = 1
   }) {
     super(game, x, y, asset)
+    this.asset = asset
     this.anchor.setTo(anchor.x, anchor.y)
     this.scale.setTo(scale)
     this.anim = {}
