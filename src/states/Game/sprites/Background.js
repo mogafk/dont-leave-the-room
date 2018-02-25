@@ -2,15 +2,6 @@ import { Animation } from 'phaser'
 import Layer from './Layer'
 
 export default (game) => {
-  const foreground = game.add.tileSprite(
-    0,
-    game.height - 66,
-    game.world.width,
-    game.height,
-    'asphalt'
-  )
-  foreground.tileScale.setTo(0.5)
-
   const layer1 = new Layer({
     game: game,
     asset: 'background',
