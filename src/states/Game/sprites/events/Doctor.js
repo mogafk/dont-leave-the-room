@@ -1,41 +1,53 @@
-import Phaser from 'phaser'
-import Doctor from './../persons/Doctor'
+import { Sprite, Point, Easing } from 'phaser'
+import Doctor from '.././persons/Doctor'
+import Hero from '.././persons/Hero'
 
-export default class extends Phaser.Group {
-  constructor (props) {
-    super(props)
+export default class extends Sprite {
+  static getAssets () {
+    return [
+      Doctor.getAsset()
+    ]
+  }
 
-    this.playerInteraction = new Phaser.Signal()
+  constructor ({ game, hero }) {
+    super(game, 0, 0)
 
-    this.target1 = new Phaser.Point(this.game.world.centerX + 10, this.game.world.centerY - 10)
+    this.pointOfAction = new Point(this.game.world.centerX, this.game.world.centerY)
 
-    this.doc = new Doctor({
-      game: this.game,
-      x: this.game.world.width + 10,
-      y: this.game.world.centerY - 10,
-      type: 1
+    this.hero = hero || new Hero({ game: this.game, x: 0, y: this.game.world.centerY })
+    this.hero.anim['walk'].play()
+
+    this.doctor = new Doctor({ game: this.game, x: this.game.world.width, y: this.game.world.centerY })
+    this.doctor.anim['go'].play()
+
+    this.hero.bringToTop()
+
+    const _dt = 0.8
+    const _t01 = this.game.add.tween(this.doctor)
+      .to({ 'x': (this.doctor.x - this.pointOfAction.x * _dt) }, 4000 * _dt, Easing.Linear.None, false)
+      .chain(this.game.add.tween(this.doctor)
+        .to({ 'x': this.pointOfAction.x }, 4000 * (1 - _dt), Easing.Linear.None, false))
+
+    const _t02 = this.game.add.tween(this.hero)
+      .to({ 'x': this.pointOfAction.x - 50 }, 4000, Easing.Linear.None, false)
+
+    const _t11 = this.game.add.tween(this.doctor)
+      .to({ 'x': -100 }, 4000, Easing.Linear.None, false)
+
+    _t01.onComplete.add(() => {
+      this.doctor.anim['hit'].play()
+      this.doctor.anim['hit'].onComplete.add(() => {
+        this.doctor.anim['go'].play()
+        _t11.start()
+      }, this)
     })
+    _t02.onComplete.add(() => { this.hero.anim['death'].play() })
 
-    const xC = this.game.world.centerX
-    const yC = this.game.world.centerY
+    this.startingPoint = _t01
+    this.startingPoint.onStart.add(() => { _t02.start() })
+  }
 
-    const bg = this.game.add.sprite(xC, yC, 'houses', 'hospital')
-    bg.anchor.setTo(0.5, 0.6)
-
-    // this.doc.turn.rotate()
-
-    const test2 = (subj, target, time) => {
-      const _t1 = this.game.add.tween(subj).to({x: target.x * 0.95}, time * 0.95, Phaser.Easing.Linear.None, false)
-      const _t2 = this.game.add.tween(subj).to({ x: target.x }, time * 0.05, Phaser.Easing.Circular.Out, false)
-      const _t3 = this.game.add.tween(subj).to({ x: -50 }, 2880, Phaser.Easing.Linear.None, false)
-      const _a3 = subj.anim['hit']
-      _t1.start()
-      subj.anim['go'].play()
-      _t1.onComplete.add(() => { _t2.start(); subj.anim['hit'].play() })
-      _t2.onComplete.add(() => { _a3.play(); this.playerInteraction.dispatch() })
-      _a3.onComplete.add(() => { _t3.start(); subj.anim['go'].play() })
-    }
-
-    test2(this.doc, this.target1, 3600 + 240)
+  play () {
+    this.startingPoint.start()
   }
 }
