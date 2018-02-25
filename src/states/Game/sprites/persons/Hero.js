@@ -5,12 +5,10 @@ const SPRITE_FILE = 'persons/hero.png'
 const FRAMES_FILE = 'persons/hero.json'
 
 export default class extends Animated {
-  static getAsset () {
-    return [ASSET_NAME, SPRITE_FILE, FRAMES_FILE]
-  }
+  static getAsset () { return [ASSET_NAME, SPRITE_FILE, FRAMES_FILE] }
 
   constructor ({game, x, y}) {
-    super({game, x, y, asset: ASSET_NAME})
+    super({ game, x, y, asset: ASSET_NAME })
 
     this.addAnimation({name: 'brokenleg', length: 15, speed: 12})
     this.addAnimation({name: 'death', length: 11, speed: 24})
