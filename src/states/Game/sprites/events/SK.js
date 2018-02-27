@@ -24,9 +24,9 @@ export default class extends Sprite {
 
     const _dt = 0.93
     const _t01 = this.game.add.tween(sk)
-      .to({ 'x': (sk.x - this.pointOfAction.x * _dt) }, 4000 * _dt, Easing.Linear.None, false)
+      .to({ 'x': (sk.x - this.subject.x * _dt) }, 4000 * _dt, Easing.Linear.None, false)
       .chain(this.game.add.tween(sk)
-        .to({ 'x': this.pointOfAction.x }, 4000 * (1 - _dt), Easing.Linear.None, false))
+        .to({ 'x': this.subject.x }, 4000 * (1 - _dt), Easing.Linear.None, false))
 
     // const _t02 = this.game.add.tween(subject)
       // .to({ 'x': this.pointOfAction.x - 50 }, 4000, Easing.Linear.None, false)

@@ -15,23 +15,23 @@ export default class extends Sprite {
     this.pointOfAction = new Point(this.game.world.centerX, this.game.world.centerY)
 
     this.hero = hero || new Hero({ game: this.game, x: 0, y: this.game.world.centerY })
-    this.hero.anim['walk'].play()
+    // this.hero.anim['walk'].play()
     this.addChild(this.hero)
 
     this.doctor = new Doctor({ game: this.game, x: this.game.world.width, y: this.hero.y })
-    // this.doctor.anim['go'].play()
+    this.doctor.anim['go'].play()
 
     this.hero.bringToTop()
 
-    const _dt = 0.8
+    // const _dt = 0.8
     const _t01 = this.game.add.tween(this.doctor)
+      // .to({
+      //   'x': (this.doctor.x - this.hero.x * _dt),
+      //   'y': (this.hero.y) }, 4000 * _dt, Easing.Linear.None, false)
+      // .chain(this.game.add.tween(this.doctor)
       .to({
-        'x': (this.doctor.x - this.pointOfAction.x * _dt),
-        'y': (this.hero.y) }, 4000 * _dt, Easing.Linear.None, false)
-      .chain(this.game.add.tween(this.doctor)
-        .to({
-          'x': this.pointOfAction.x
-        }, 4000 * (1 - _dt), Easing.Linear.None, false))
+        'x': this.hero.x + 20
+      }, 4000, Easing.Linear.None, false)
 
     // const _t02 = this.game.add.tween(this.hero)
       // .to({ 'x': this.pointOfAction.x - 50 }, 4000, Easing.Linear.None, false)

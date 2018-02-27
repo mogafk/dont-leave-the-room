@@ -8,6 +8,9 @@ export default class extends Sprite {
     this.activated = false
     this.onDestroyed = new Signal()
 
+    this.sfx = this.game.add.audio('fall-with-impact')
+    this.sfx.allowMultiple = true
+
     //  добавляю задник
     this.back = this.game.add.sprite(0, 0, 'house-police')
     this.back.anchor.setTo(0, 1)
@@ -36,9 +39,9 @@ export default class extends Sprite {
     const _p0 = this.startPoint = this.game.add
       .tween(this.faller)
       .to({
-        'y': 90
+        'y': 80
       },
-      2000,
+      1700,
       Easing.Linear.None,
       false
       )
@@ -54,6 +57,7 @@ export default class extends Sprite {
   //  Запуск падающего
   play () {
     this.activated = true
+    this.sfx.play('', 0, 1, false)
     this.startPoint.start()
     this.faller.anim['fall'].play()
   }

@@ -6,10 +6,13 @@ import Chance from './sprites/Chance'
 import Hero from './sprites/persons/Hero'
 import Background from './sprites/Background'
 
+import showModal from '.././Modal'
+
 import { Brevik, Doctor, DPS, FSB, Nazi, Rifle, SK } from './sprites/events'
 import { BGBaby, BGCroc, BGExplose, BGIcicle, BGMontirovka, BGPolice, BGRape } from './sprites/bgevents'
 
 const EVENTS = [DPS, Doctor, FSB, Rifle, SK, Brevik, Nazi]
+// const EVENTS = [Doctor]
 const BGEVENTS = [BGIcicle, BGMontirovka, BGPolice, BGRape, BGCroc, BGBaby, BGExplose]
 
 export default class extends Phaser.State {
@@ -94,34 +97,39 @@ export default class extends Phaser.State {
     }
 
     const showDeathImage = () => {
-      const _img = this.game.add.sprite(
-        this.game.camera.width / 2,
-        this.game.camera.height / 2,
-        'ui-death'
+      showModal(
+        this.chance.getSteps(),
+        () => this.state.start('Game')
       )
-      const _scaleW = this.game.width / _img.width
-      const _scaleH = this.game.height / _img.height
-      _img.scale.setTo(Math.max(_scaleW, _scaleH))
-      _img.anchor.setTo(0.5)
-      _img.alpha = 0
-      const _t0 = this.game.add.tween(_img)
-        .to({ 'alpha': 1 }, 1000, Phaser.Easing.Linear.None, false)
-      _t0.start()
-      _t0.onComplete.add(() => {
-        this.buttonReplay = this.game.add.button(
-          this.game.world.width - 150,
-          50,
-          'buttonReplay',
-          () => {
-            this.music.destroy()
-            this.state.start('Game')
-          })
-        this.buttonReplay.scale.setTo(0.5)
-      }, this)
+      // const _img = this.game.add.sprite(
+      //   this.game.camera.width / 2,
+      //   this.game.camera.height / 2,
+      //   'ui-death'
+      // )
+      // const _scaleW = this.game.width / _img.width
+      // const _scaleH = this.game.height / _img.height
+      // _img.scale.setTo(Math.max(_scaleW, _scaleH))
+      // _img.anchor.setTo(0.5)
+      // _img.alpha = 0
+      // const _t0 = this.game.add.tween(_img)
+      //   .to({ 'alpha': 1 }, 1000, Phaser.Easing.Linear.None, false)
+      // _t0.start()
+      // _t0.onComplete.add(() => {
+      //   this.buttonReplay = this.game.add.button(
+      //     this.game.world.width - 150,
+      //     50,
+      //     'buttonReplay',
+      //     () => {
+      //       this.music.destroy()
+      //       this.state.start('Game')
+      //     })
+      //   this.buttonReplay.scale.setTo(0.5)
+      // }, this)
     }
 
     const shitHappensEvent = () => {
-      this.hero.anim['stop'].play()
+      // this.hero.anim['stop'].play()
+
       // this.game.time.events.add(
       //   Phaser.Timer.SECOND * 1,
       //   () => {
@@ -131,8 +139,12 @@ export default class extends Phaser.State {
       //   this
       // )
       this.block = true
-      this.isMove = true
+      this.isMove = false
       this.game.rnd.pick(scenarios)()
+      this.isMove = true
+      this.hero.anim['stop'].onComplete.add(() => {
+        this.isMove = false
+      }, this)
       this.game.world.bringToTop(this.layer5)
       this.hero.anim['death'].onComplete.add(endSession, this)
       this.hero.anim['brokenleg'].onComplete.add(endSession, this)
@@ -148,6 +160,8 @@ export default class extends Phaser.State {
     }
     this.spaceKey.onDown.add(onClick, this)
     this.game.input.onDown.add(() => { onClick() }, this)
+
+    this.layer4.y += 30
   }
   render () {
     // if (__DEV__) {

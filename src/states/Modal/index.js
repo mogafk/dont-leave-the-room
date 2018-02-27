@@ -8,11 +8,30 @@ const template = Handlebars.compile(rawTemplate)
 // template({'variable':'NJNJNJNJ'})
 // console.log(template({'variable': 'NJNJNJNJ'}))
 
-export default (step) => {
+export default (step, cb) => {
   var res = {'currentURL': encodeURIComponent(window.location.href + `?step=${step}&_share=1`)}
-  if (step === 0) {
+  console.log('STEPS:', step)
+  if (step <= 0) {
     res['background'] = './assets/results/stay-home.png'
     res['title'] = 'Вы победили!'
+    res['text'] = 'Остаться дома - самый правильный вариант! поделитесь своей победой с друзьями!'
+  }
+
+  if (step > 0 && step < 50) {
+    res['background'] = './assets/results/less50.png'
+    res['title'] = 'Вы умерли!'
+    res['text'] = 'Остаться дома - самый правильный вариант! поделитесь своей победой с друзьями!'
+  }
+
+  if (step >= 50 && step < 100) {
+    res['background'] = './assets/results/over50.png'
+    res['title'] = 'Вы умерли!'
+    res['text'] = 'Остаться дома - самый правильный вариант! поделитесь своей победой с друзьями!'
+  }
+
+  if (step >= 100) {
+    res['background'] = './assets/results/over100.png'
+    res['title'] = 'Вы умерли!'
     res['text'] = 'Остаться дома - самый правильный вариант! поделитесь своей победой с друзьями!'
   }
 
@@ -20,7 +39,10 @@ export default (step) => {
 
   const fragment = document.createElement('div')
   fragment.innerHTML = html
-  document.getElementById('content').appendChild(fragment)
+  document.body.appendChild(fragment)
 
-  return 'CONSOLE'
+  document.querySelector('#selector-for-button').onclick = function() {
+    document.body.removeChild(fragment)
+    cb()
+  }
 }

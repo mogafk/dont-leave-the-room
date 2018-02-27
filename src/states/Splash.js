@@ -7,8 +7,9 @@ export default class extends State {
   preload () {
     // centerGameObjects([this.loaderBg, this.loaderBar])
     // this.load.setPreloadSprite(this.loaderBar)
-    this.game.load.image('splash-screen', './assets/splash.png')
-    this.game.load.atlasJSONArray('splash-button', './assets/ui/splash-button.png', './assets/ui/splash-button.json')
+    this.game.load.baseURL = './assets/'
+    this.game.load.image('splash-screen', './splash.png')
+    this.game.load.atlasJSONArray('splash-button', './ui/splash-button.png', './ui/splash-button.json')
   }
 
   create () {
@@ -30,7 +31,5 @@ export default class extends State {
     const _scaleBH = this.game.camera.height / button1.height
     button1.scale.setTo(Math.max(_scaleBW, _scaleBH) * 0.15)
     // button1.scale.setTo(0.25)
-
-    // 
   }
 }

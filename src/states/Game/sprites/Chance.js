@@ -24,7 +24,7 @@ const Counter = () => {
     },
     increment: () => { value = value * INCREMENTAL_VALUE; return value },
     getChoice: () => {
-      return Utils.chanceRoll(100)
+      return Utils.chanceRoll(1)
     }
   }
 }
@@ -77,6 +77,7 @@ export default class extends Group {
     stepCounter.x = this.bg.right - 20
 
     const steps = new Steps()
+    this._steps = steps
     stepCounter.setText(`${steps.getValue()}`)
 
     const eventsText = game.add.text(
@@ -109,5 +110,9 @@ export default class extends Group {
       animation.onUpdateCallback(() => printText(a.val), this)
     }
     printText()
+  }
+
+  getSteps () {
+    this._steps.getValue()
   }
 }

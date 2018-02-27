@@ -3,7 +3,8 @@ import WebFont from 'webfontloader'
 
 export default class extends Phaser.State {
   init () {
-    this.stage.backgroundColor = '#EDEEC9'
+    // this.stage.backgroundColor = '#EDEEC9'
+    this.stage.backgroundColor = 0x000000
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
   }
@@ -25,7 +26,7 @@ export default class extends Phaser.State {
     text.anchor.setTo(0.5, 0.5)
 
     this.load.crossOrigin = 'anonymous'
-    this.game.load.baseURL = './assets/'
+    // this.game.load.baseURL = './assets/'
     // this.game.load.atlasJSONHash('foreground', 'backgrounds/asset1.png', 'backgrounds/asset1.json')
     // this.game.load.spritesheet('button', 'PowerButtonsAsset.png', 62, 70, 3)
     // this.game.load.atlasJSONHash('neo', 'persons/neo.png', 'persons/neo.json')
@@ -59,6 +60,11 @@ export default class extends Phaser.State {
     this.game.load.image('ui-death', 'ui/death.png')
     this.game.load.audio('main-theme', ['sound/main-theme.mp3', 'sound/main-theme.ogg'])
     this.game.load.audio('shag-intro', ['sound/shag-intro.mp3', 'sound/shag-intro.ogg'])
+    this.game.load.audio('machine-gun', ['sound/machine-gun-loop.mp3', 'sound/machine-gun-loop.ogg'])
+    this.game.load.audio('glass-smash', ['sound/glass-smash-bottle-h.mp3', 'sound/glass-smash-bottle-h.ogg'])
+    this.game.load.audio('fall-with-impact', ['sound/fall-with-impact.mp3', 'sound/fall-with-impact.ogg'])
+    this.game.load.audio('explosion', ['sound/explosion.mp3', 'sound/explosion.ogg'])
+    this.game.load.audio('crying-baby', ['sound/crying-newborn-baby-child-2.mp3', 'sound/crying-newborn-baby-child-2.ogg'])
     this.game.load.audio('event1', 'sound/event1.mp3')
   }
 
