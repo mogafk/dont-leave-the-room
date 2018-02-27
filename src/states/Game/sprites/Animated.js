@@ -42,7 +42,6 @@ export default class extends Sprite {
       onComplete: _completion,
       play: () => { this.animations.play(name); return _completion }
     }
-
     // this.inputEnabled = true
     // this.input.enableDrag(true)
   }

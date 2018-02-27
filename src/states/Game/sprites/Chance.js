@@ -24,7 +24,7 @@ const Counter = () => {
     },
     increment: () => { value = value * INCREMENTAL_VALUE; return value },
     getChoice: () => {
-      return Utils.chanceRoll(15)
+      return Utils.chanceRoll(1)
     }
   }
 }

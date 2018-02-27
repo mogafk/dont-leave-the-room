@@ -1,20 +1,22 @@
 
-import { Sprite, Point, Easing } from 'phaser'
+import { Sprite, Point, Easing, Signal } from 'phaser'
 import Animated from '.././Animated'
 
 export default class extends Sprite {
   constructor (props) {
     super(props)
     this.activated = false
-    //  синоним для X центра сцены
-    const WXC = this.game.world.centerX
-    //  синоним для высоты сцены
-    const WYH = this.game.world.height
+    this.onDestroyed = new Signal()
 
     //  добавляю задник
-    this.back = this.game.add.sprite(WXC, 0, 'houses', 'police')
-    this.back.anchor.setTo(0.5, 1)
-
+    this.back = this.game.add.sprite(0, 0, 'house-police')
+    this.back.anchor.setTo(0, 1)
+    this.back.outOfCameraBoundsKill = true
+    this.back.autoCull = true
+    this.back.events.onKilled.add(() => {
+      this.onDestroyed.dispatch()
+      this.destroy()
+    }, this)
     this.addChild(this.back)
 
     //  добавляю падающего человека с анимациями fall и fall_death
@@ -23,7 +25,7 @@ export default class extends Sprite {
       x: +150,
       y: -800,
       asset: 'men2',
-      anchor: new Point(0.5, 0.5)
+      anchor: new Point(0.5, 1)
     })
     this.faller.addAnimation({name: 'fall', length: 24, loop: true})
     this.faller.addAnimation({name: 'fall_death', length: 21, speed: 90, loop: false})
@@ -34,7 +36,7 @@ export default class extends Sprite {
     const _p0 = this.startPoint = this.game.add
       .tween(this.faller)
       .to({
-        'y': -130
+        'y': 90
       },
       2000,
       Easing.Linear.None,
@@ -46,6 +48,8 @@ export default class extends Sprite {
     _p0.onComplete.add(() => {
       this.faller.anim['fall_death'].play()
     })
+
+    this.game.add.existing(this)
   }
   //  Запуск падающего
   play () {

@@ -1,5 +1,5 @@
 
-import { Sprite, Point, Easing } from 'phaser'
+import { Sprite, Point, Easing, Signal } from 'phaser'
 import Animated from '.././Animated'
 
 export default class extends Sprite {
@@ -7,41 +7,50 @@ export default class extends Sprite {
     super(props)
     this.activated = false
 
+    this.onDestroyed = new Signal()
+
     //  добавляю задник
-    this.back = this.game.add.sprite(this.game.world.centerX, this.game.world.height, 'houses', 'house-0')
-    this.back.anchor.setTo(0.5, 1)
+    this.back = this.game.add.sprite(0, 0, 'house-0')
+    this.back.anchor.setTo(0, 1)
+    this.back.outOfCameraBoundsKill = true
+    this.back.autoCull = true
+    this.back.events.onKilled.add(() => {
+      this.onDestroyed.dispatch()
+      this.destroy()
+    }, this)
     this.addChild(this.back)
 
     this.faller = new Animated({
       game: this.game,
-      x: this.game.world.centerX,
-      y: this.game.world.centerY - 800,
+      x: 0,
+      y: 0,
       asset: 'icicle',
-      anchor: new Point(0.5, 0.5)
+      anchor: new Point(0.5, 1)
     })
     this.faller.addAnimation({name: 'sosulya', length: 13, loop: false})
     this.addChild(this.faller)
 
     this.men = new Animated({
       game: this.game,
-      x: 0,
-      y: this.game.world.centerY + 25,
+      x: this.back.right,
+      y: 50,
       asset: 'men1',
-      anchor: new Point(0.5, 0.5)
+      anchor: new Point(0.5, 1)
     })
     this.men.addAnimation({name: 'go', length: 22, loop: true})
     this.men.addAnimation({name: 'death', length: 26, loop: false})
+    this.men.turn.rotate()
     this.addChild(this.men)
 
-    this.pointOfAction = new Point(this.game.world.centerX, this.game.world.centerY + 25)
+    this.pointOfAction = new Point(0, 0)
 
-    const _dt = 0.666
+    const _dt = 0.8
     const _t00 = this.startingPoint = this.game.add
       .tween(this.men)
-      .to({ 'x': this.pointOfAction.x * _dt }, 2000 * _dt, Easing.Linear.None, false)
+      .to({ 'x': this.men.x - ((this.men.x - this.pointOfAction.x) * _dt) }, 4000 * _dt, Easing.Linear.None, false)
     const _t01 = this.game.add
       .tween(this.men)
-      .to({ 'x': this.pointOfAction.x }, 2000 * (1 - _dt), Easing.Linear.None, false)
+      .to({ 'x': this.pointOfAction.x }, 4000 * (1 - _dt), Easing.Linear.None, false)
     const _t1 = this.game.add
       .tween(this.faller)
       .to({ 'y': this.pointOfAction.y * 0.95 }, 2000 * 0.95, Easing.Linear.None, false)

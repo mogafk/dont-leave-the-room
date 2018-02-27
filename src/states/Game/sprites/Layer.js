@@ -68,27 +68,4 @@ export default class extends Group {
     const { speed } = this.custom
     this.addAll('x', speed * velocity)
   }
-
-  // createBatch (offset = 0) {
-
-  //   const last = this.getTop()
-  //   const toConsole = this.create(
-  //     last
-  //       ? Math.min(last.x + last.width, this.game.world.width)
-  //       : 0,
-  //     0, `${this.assetName}${1 + Math.ceil(Math.random() * this.assetLength - 1)}`)
-  //   toConsole.anchor.setTo(0.5, 1, 1)
-
-
-  //   toConsole.checkWorldBounds = true
-  //   toConsole.events.onOutOfBounds.add(
-  //     () => {
-
-  //       this.createBatch()
-  //       // toConsole.destroy()
-  //     }, this)
-  //   toConsole.events.onDestroy.add(() => {
-
-  //   })
-  // }
 }

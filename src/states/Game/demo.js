@@ -2,10 +2,7 @@
 import Phaser from 'phaser'
 
 import Background from './sprites/Background'
-// import Animated from './sprites/Animated'
-// import CrocEvent from './sprites/bgevents/croc'
-// import PoliceEvent from './sprites/bgevents/police'
-import TrashCan from './sprites/bgevents/baby-trash'
+import { BGMontirovka } from './sprites/bgevents'
 
 export default class extends Phaser.State {
   init () {
@@ -13,29 +10,71 @@ export default class extends Phaser.State {
   }
 
   preload () {
-    this.game.load.atlasJSONHash('croc', 'events/croc.png', 'events/croc.json')
-    this.game.load.atlasJSONHash('men2', 'persons/men2.png', 'persons/men2.json')
-    this.game.load.atlasJSONHash('men3', 'persons/men3.png', 'persons/men3.json')
+    // BGMontirovka.getAssets().map(el => {
+    //   this.game.load.atlasJSONHash(...el)
+    // })
+
+    this.game.load.atlasJSONHash('montirovka-car', 'events/montirovka_car.png', 'events/montirovka_car.json')
+    this.game.load.atlasJSONHash('montirovka-man', 'persons/montirovka.png', 'persons/montirovka.json')
+
     if (__DEV__) {
       this.game.time.advancedTiming = true
     }
   }
 
   create () {
-    // рисую фон
     Background(this.game)
 
-    // this.crocEvent = new PoliceEvent(this.game, 0, 0)
-    // this.crocEvent.play()
+    // this.fx = this.game.add.audioSprite('sfx')
+    // this.fx.allowMultiple = true
 
-    // this.policeEvent = new PoliceEvent(this.game, 0, 0)
-    // this.policeEvent.play()
+    // this.montirovka = new BGMontirovka(this.game, this.game.world.centerX, this.game.world.centerY)
+    // this.montirovka.play()
 
-    this.TrashCan = new TrashCan(this.game, 0, 0)
-    this.TrashCan.play()
+    // // this.montirovka.x = this.game.width - 100
+    // this.game.add.existing(this.montirovka)
+
+    this.layer4 = this.game.add.group()
+    this.layer4.y = this.game.world.height - 100
+
+    this.eventObservers = []
+    let _bgevents = [BGMontirovka] //  Phaser.ArrayUtils.shuffle(BGEVENTS)
+    const createBGEvent = () => {
+      if (_bgevents.length <= 0) return false
+      const Constructor = _bgevents.pop()
+      const _ev = new Constructor(this.game, 0, 0)
+      this.layer4.add(_ev)
+      // _ev.x = this.game.width - 1
+      _ev.onDestroyed.add(createBGEvent)
+      this.eventObservers.push(_ev)
+      _ev.play()
+      return true
+    }
+
+    createBGEvent()
+
+    // this.dps = new DPS({ game: this.game })
+    // this.dps.play()
+
+    // this.music = this.game.add.audio('main-theme')
+    // this.music.play()
+
+    // this.sfx1 = this.game.add.audio('event1')
+    // this.sfx1.allowMultiple = true
+    // this.sfx1.play()
+
+    // this.video = this.game.add.video('intro')
+    // this.video.play(false)
+    //  x, y, anchor x, anchor y, scale x, scale y
+    // this.video.addToWorld()
+    // const vid = this.video.addToWorld(this.game.world.centerX, this.game.world.centerY, 0.5, 0.65, 1, 1)
+    // this.video.onComplete.add(() => {
+    //   vid.destroy()
+    //   vid.removeVideoElement()
+    // })
   }
 
   render () {
-    // if (this.croc.alive) { this.game.debug.spriteInfo(this.croc, 20, 20) }
+    this.game.debug.spriteInfo(this.layer4.getTop(), 20, 20)
   }
 }

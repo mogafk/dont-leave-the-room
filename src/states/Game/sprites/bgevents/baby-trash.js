@@ -1,20 +1,24 @@
-import { Sprite, Easing } from 'phaser'
+import { Sprite, Easing, Signal } from 'phaser'
 
 export default class extends Sprite {
   constructor (props) {
     super(props)
 
-    //  синоним для X центра сцены
-    const WXC = this.game.world.centerX
-    //  синоним для высоты сцены
-    const WYH = this.game.world.height
+    this.onDestroyed = new Signal()
 
     //  добавляю мусорный бак
-    this.trashCan = this.game.add.sprite(WXC, WYH + 100, 'houses', 'trashcan')
-    this.trashCan.anchor.setTo(0.5, 1)
-    this.trashCan.pivot.setTo(0.5)
+    this.trashCan = new Sprite(this.game, this.x, this.y, 'trashcan')
+    this.trashCan.anchor.setTo(0, 1)
+    this.trashCan.pivot.setTo(0.5, 1)
     this.addChild(this.trashCan)
-    this.game.add.existing(this)
+    this.anchor.setTo(0.5, 1)
+
+    this.trashCan.outOfCameraBoundsKill = true
+    this.trashCan.autoCull = true
+    this.trashCan.events.onKilled.add(() => {
+      this.onDestroyed.dispatch()
+      this.destroy()
+    }, this)
 
     // Цикл тряски бака
     const _p0 = this.startPoint = this.game.add
@@ -27,9 +31,9 @@ export default class extends Sprite {
       .tween(this.trashCan)
       .to({ angle: '+2' }, 50, Easing.Elastic.InOut)
     _p0.chain(_p1.chain(_p2.chain(_p0)))
+
+    this.game.add.existing(this)
   }
 
-  play () {
-    this.startPoint.start()
-  }
+  play () {}
 }

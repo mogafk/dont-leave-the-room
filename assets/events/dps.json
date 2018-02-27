@@ -1,6 +1,6 @@
 {"frames": {
 
-"dps_door/dps_door_00001":
+"door_00001":
 {
 	"frame": {"x":1,"y":1,"w":400,"h":160},
 	"rotated": false,
@@ -8,7 +8,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_door/dps_door_00002":
+"door_00002":
 {
 	"frame": {"x":403,"y":1,"w":400,"h":160},
 	"rotated": false,
@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_door/dps_door_00003":
+"door_00003":
 {
 	"frame": {"x":1,"y":163,"w":400,"h":160},
 	"rotated": false,
@@ -24,7 +24,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_door/dps_door_00004":
+"door_00004":
 {
 	"frame": {"x":403,"y":163,"w":400,"h":160},
 	"rotated": false,
@@ -32,7 +32,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_door/dps_door_00005":
+"door_00005":
 {
 	"frame": {"x":1,"y":325,"w":400,"h":160},
 	"rotated": false,
@@ -40,7 +40,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_door/dps_door_00006":
+"door_00006":
 {
 	"frame": {"x":403,"y":325,"w":400,"h":160},
 	"rotated": false,
@@ -48,7 +48,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00001":
+"siren_00001":
 {
 	"frame": {"x":1,"y":1,"w":400,"h":160},
 	"rotated": false,
@@ -56,7 +56,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00002":
+"siren_00002":
 {
 	"frame": {"x":1,"y":487,"w":400,"h":160},
 	"rotated": false,
@@ -64,7 +64,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00003":
+"siren_00003":
 {
 	"frame": {"x":1,"y":649,"w":400,"h":160},
 	"rotated": false,
@@ -72,7 +72,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00004":
+"siren_00004":
 {
 	"frame": {"x":1,"y":811,"w":400,"h":160},
 	"rotated": false,
@@ -80,7 +80,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00005":
+"siren_00005":
 {
 	"frame": {"x":403,"y":487,"w":400,"h":160},
 	"rotated": false,
@@ -88,7 +88,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00006":
+"siren_00006":
 {
 	"frame": {"x":403,"y":649,"w":400,"h":160},
 	"rotated": false,
@@ -96,7 +96,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00007":
+"siren_00007":
 {
 	"frame": {"x":403,"y":811,"w":400,"h":160},
 	"rotated": false,
@@ -104,7 +104,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00008":
+"siren_00008":
 {
 	"frame": {"x":403,"y":649,"w":400,"h":160},
 	"rotated": false,
@@ -112,7 +112,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00009":
+"siren_00009":
 {
 	"frame": {"x":403,"y":487,"w":400,"h":160},
 	"rotated": false,
@@ -120,7 +120,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00010":
+"siren_00010":
 {
 	"frame": {"x":1,"y":811,"w":400,"h":160},
 	"rotated": false,
@@ -128,7 +128,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00011":
+"siren_00011":
 {
 	"frame": {"x":1,"y":649,"w":400,"h":160},
 	"rotated": false,
@@ -136,7 +136,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":400,"h":160},
 	"sourceSize": {"w":400,"h":160}
 },
-"dps_migalka/dps_siren_00012":
+"siren_00012":
 {
 	"frame": {"x":1,"y":487,"w":400,"h":160},
 	"rotated": false,

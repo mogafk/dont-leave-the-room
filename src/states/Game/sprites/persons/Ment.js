@@ -10,8 +10,8 @@ export default class extends Animated {
   constructor ({game, x, y}) {
     super({ game, x, y, asset: ASSET_NAME })
 
-    this.addAnimation({ name: 'go', length: 24, speed: 24 })
-    this.addAnimation({ name: 'go_gun', length: 24, speed: 24 })
+    this.addAnimation({ name: 'go', length: 24, speed: 24, loop: true })
+    this.addAnimation({ name: 'go_gun', length: 24, speed: 24, loop: true })
     this.addAnimation({ name: 'gun', length: 24, speed: 24 })
     this.addAnimation({ name: 'gaz', length: 37, speed: 24 })
     this.addAnimation({ name: 'hit', length: 24, speed: 24 })

@@ -63,9 +63,6 @@ export default class extends Phaser.State {
       })
     }
     generate(['Brevik', 'Doctor', 'Gaster', 'Hero', 'Men1', 'Men2', 'Men3', 'Men4', 'Men5', 'Ment', 'Montirovka', 'Neo'])
-
-    console.log(this.persons)
-
     this.SPRT = this.persons['Brevik']()
 
     this._sprite = {

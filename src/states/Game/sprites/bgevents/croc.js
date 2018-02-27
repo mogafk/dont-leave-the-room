@@ -1,26 +1,31 @@
-import { Sprite, Point, Easing } from 'phaser'
+import { Sprite, Point, Easing, Signal } from 'phaser'
 import Animated from '.././Animated'
 
 export default class extends Sprite {
   constructor (props) {
     super(props)
     this.activated = false
-    //  синоним для X центра сцены
-    const WXC = this.game.world.centerX
-    //  синоним для высоты сцены
-    const WYH = this.game.world.height
 
     //  добавляю задник
-    this.back = this.game.add.sprite(WXC, 0, 'houses', 'house-1')
-    this.back.anchor.setTo(0.5, 1)
+    this.back = this.game.add.sprite(0, 0, 'houses', 'house-1')
 
+    this.onDestroyed = new Signal()
+
+    this.anchor.setTo(0, 1)
     this.addChild(this.back)
+    this.back.anchor.setTo(0, 1)
+    this.back.outOfCameraBoundsKill = true
+    this.back.autoCull = true
+    this.back.events.onKilled.add(() => {
+      this.onDestroyed.dispatch()
+      this.destroy()
+    }, this)
 
     //  добавляю анимированного крокодила с анимациями lie и fly
     this.croc = new Animated({
       game: this.game,
-      x: -200,
-      y: -800,
+      x: 0,
+      y: -600,
       asset: 'croc',
       anchor: new Point(0.5, 0.5)
     })
@@ -32,10 +37,10 @@ export default class extends Sprite {
     //  добавляю владельца крокодила с анимациями go и croc
     this.men = new Animated({
       game: this.game,
-      x: 80,
-      y: -80,
+      x: 350,
+      y: -50,
       asset: 'men3',
-      anchor: new Point(0.5, 1),
+      anchor: new Point(0.5, 0.5),
       scale: 0.6
     })
     this.men.addAnimation({name: 'croc', length: 13, loop: true})
@@ -53,9 +58,9 @@ export default class extends Sprite {
     const _p0 = this.startPoint = this.game.add
       .tween(this.croc)
       .to({
-        'y': -50
+        'y': 0
       },
-      2000,
+      1000,
       Easing.Back.In,
       false
       )
@@ -66,7 +71,7 @@ export default class extends Sprite {
       .to({
         'alpha': 1,
         'x': '-80',
-        'y': '+80'
+        'y': '0'
       },
       1000,
       Easing.Linear.None,
@@ -79,7 +84,11 @@ export default class extends Sprite {
       .to({
         x: 1,
         y: 1
-      })
+      },
+      1000,
+      Easing.Linear.None,
+      false
+      )
 
       //  Человек идёт к крокодилу
     const _p1 = this.game.add
@@ -113,16 +122,9 @@ export default class extends Sprite {
     _p1.onComplete.add(() => {
       this.men.addChild(this.croc)
       this.croc.x = 0
-      this.croc.y = -90
+      this.croc.y = 0
       this.croc.angle += 15
       this.men.anim['go'].play()
-      this.men.checkWorldBounds = true
-      this.men.events.onOutOfBounds.add(() => {
-        this.men.destroy()
-        console.log('this men destroyed')
-        console.log(this.men)
-        console.log(this.croc)
-      })
       _p2.start()
     })
   }
