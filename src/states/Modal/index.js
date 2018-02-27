@@ -10,7 +10,7 @@ const template = Handlebars.compile(rawTemplate)
 
 export default (step) => {
   var res = {'currentURL': encodeURIComponent(window.location.href + `?step=${step}&_share=1`)}
-  if (step < 50) {
+  if (step === 0) {
     res['background'] = './assets/results/stay-home.png'
     res['title'] = 'Вы победили!'
     res['text'] = 'Остаться дома - самый правильный вариант! поделитесь своей победой с друзьями!'

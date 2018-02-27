@@ -1,14 +1,10 @@
 import { State } from 'phaser'
 // import { centerGameObjects } from '../utils'
-import show from './Modal'
-
-console.log(show)
 
 export default class extends State {
   init () {}
 
   preload () {
-    show(49)
     // centerGameObjects([this.loaderBg, this.loaderBar])
     // this.load.setPreloadSprite(this.loaderBar)
     this.game.load.image('splash-screen', './assets/splash.png')

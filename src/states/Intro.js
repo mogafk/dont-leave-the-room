@@ -1,5 +1,7 @@
 import { State, Animation, Easing, ArrayUtils } from 'phaser'
 
+import show from './Modal'
+
 export default class extends State {
   init () {}
 
@@ -73,7 +75,7 @@ export default class extends State {
     button1.scale.setTo(0.25)
 
     const button2 = this.game.add.button(this.game.world.centerX, this.game.world.centerY + 50, 'buttons',
-      () => { window.location.href += '?result=1' },
+      () => { show(0) },
       this, 'stay-0.png', 'stay-0.png', 'stay-1.png', 'stay-0.png')
     button2.anchor.setTo(0.5, 1)
     button2.scale.setTo(0.25)
