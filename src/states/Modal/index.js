@@ -8,11 +8,17 @@ const template = Handlebars.compile(rawTemplate)
 // template({'variable':'NJNJNJNJ'})
 // console.log(template({'variable': 'NJNJNJNJ'}))
 
+
+let BG_PATH = './assets/results/'
+if(__DEV__ == false) {
+  BG_PATH = '/dont_leave_room/assets/results/'
+} 
+
 export default (step, cb) => {
   var res = {'currentURL': encodeURIComponent(window.location.href + `?step=${step}&_share=1`)}
   console.log('STEPS:', step)
   if (step <= 0) {
-    res['background'] = './assets/results/stay-home.png'
+    res['background'] = `${BG_PATH}stay-home.png`
     res['title'] = 'Вы победили!'
     res['text'] = 'Остаться дома - самый правильный вариант! поделитесь своей победой с друзьями!'
   }
@@ -37,6 +43,7 @@ export default (step, cb) => {
 
   var html = template(res)
 
+  // const fragment = document.createElement('div')
   const fragment = document.createElement('div')
   fragment.innerHTML = html
   document.body.appendChild(fragment)

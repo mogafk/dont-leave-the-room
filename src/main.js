@@ -9,11 +9,11 @@ import InrtoState from './states/Intro'
 import config from './config'
 
 class Game extends Phaser.Game {
-  constructor () {
+  constructor (container) {
     const docElement = document.documentElement
     const width = Math.min(docElement.clientWidth, config.gameWidth)
     const height = Math.min(docElement.clientHeight, config.gameHeight)
-    super(width, height, Phaser.Canvas, 'content', null)
+    super(width, height, Phaser.Canvas, container || 'content', null)
 
     this.pixelRatio = window.devicePixelRatio
 
@@ -23,13 +23,25 @@ class Game extends Phaser.Game {
     this.state.add('Intro', InrtoState, false)
 
     // with Cordova with need to wait that the device is ready so we will call the Boot state in another file
-    if (!window.cordova) {
-      this.state.start('Splash') //  Boot
-    }
+    // if (!window.cordova) {
+    //   this.state.start('Splash') //  Boot
+    // }
   }
 }
 
-window.game = new Game()
+// window.game = new Game()
+console.log('_DEV_', __DEV__);
+
+if(__DEV__) {
+  window.game = new Game()
+  window.game.state.start('Splash');
+} else {
+  window.startGame = (containerId) => {
+    const game = new Game(containerId);
+    game.state.start('Splash');
+    return game;
+  };
+}
 
 if (window.cordova) {
   var app = {

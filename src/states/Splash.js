@@ -7,9 +7,13 @@ export default class extends State {
   preload () {
     // centerGameObjects([this.loaderBg, this.loaderBar])
     // this.load.setPreloadSprite(this.loaderBar)
-    this.game.load.baseURL = './assets/'
-    this.game.load.image('splash-screen', './splash.png')
-    this.game.load.atlasJSONArray('splash-button', './ui/splash-button.png', './ui/splash-button.json')
+    // this.game.load.baseURL = './assets/'
+    this.game.load.baseURL = '/dont_leave_room/assets/'
+    // this.game.load.image('splash-screen', './splash.png')
+    // this.game.load.atlasJSONArray('splash-button', './ui/splash-button.png', './ui/splash-button.json')
+
+    this.game.load.image('splash-screen', 'splash.png')
+    this.game.load.atlasJSONArray('splash-button', 'ui/splash-button.png', 'ui/splash-button.json')
   }
 
   create () {

@@ -26,6 +26,7 @@ export default class extends Phaser.State {
     text.anchor.setTo(0.5, 0.5)
 
     this.load.crossOrigin = 'anonymous'
+    this.game.load.baseURL = '/dont_leave_room/assets/'
     // this.game.load.baseURL = './assets/'
     // this.game.load.atlasJSONHash('foreground', 'backgrounds/asset1.png', 'backgrounds/asset1.json')
     // this.game.load.spritesheet('button', 'PowerButtonsAsset.png', 62, 70, 3)
