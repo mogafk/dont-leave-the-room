@@ -1,9 +1,9 @@
 import {Easing, Group, Utils, Signal} from 'phaser'
 
 const FONT_STYLE = {
-  font: 'bold 40pt Courier',
+  font: '10pt Arial',
   fill: 'white',
-  align: 'left'
+  align: 'right'
 }
 const EASING = Easing.Sinusoidal.InOut
 const INITIAL_VALUE = 0.99 // 99%
@@ -24,7 +24,7 @@ const Counter = () => {
     },
     increment: () => { value = value * INCREMENTAL_VALUE; return value },
     getChoice: () => {
-      return Utils.chanceRoll(1)
+      return Utils.chanceRoll(100)
     }
   }
 }
@@ -43,29 +43,41 @@ export default class extends Group {
 
     this.onEvent = new Signal()
 
+    this.bg = game.add.sprite(
+      game.camera.width / 2,
+      0,
+      'ui-plashka'
+    )
+
+    this.bg.scale.setTo(0.6)
+
+    this.bg.anchor.setTo(0.5, 0)
+
+    this.addChild(this.bg)
+
     const text = game.add.text(
-      game.world.centerX,
-      50,
+      0,
+      20,
       '',
       FONT_STYLE
     )
     this.addChild(text)
     const chance = new Counter()
-    text.anchor.setTo(0.5)
+    text.anchor.setTo(1, 0.5)
+    text.x = this.bg.right - 20
 
     const stepCounter = game.add.text(
-      game.world.centerX,
-      85,
+      0,
+      55,
       '',
-      {
-        font: '30pt Courier',
-        fill: 'white',
-        align: 'left'
-      }
+      FONT_STYLE
     )
     this.addChild(stepCounter)
-    stepCounter.anchor.setTo(0.5)
+    stepCounter.anchor.setTo(1, 0.5)
+    stepCounter.x = this.bg.right - 20
+
     const steps = new Steps()
+    stepCounter.setText(`${steps.getValue()}`)
 
     const eventsText = game.add.text(
       game.world.centerX,
@@ -88,7 +100,7 @@ export default class extends Group {
       const step = steps.increment()
       let choice = chance.getChoice()
       if (choice) this.onEvent.dispatch()
-      stepCounter.setText(`Шагов: ${step}`)
+      stepCounter.setText(`${step}`)
       // eventsText.setText(choice ? 'СОБЫТИЕ!' : 'событий нет')
       let a = {val: chance.getValue()}
       const b = {val: chance.increment()}

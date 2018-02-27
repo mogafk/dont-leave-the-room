@@ -15,7 +15,7 @@ export default class extends Sprite {
     this.pointOfAction = new Point(this.game.world.centerX, this.game.world.centerY)
 
     const subject = hero || new Hero({ game: this.game, x: 0, y: this.game.world.centerY })
-    subject.anim['walk'].play()
+    // subject.anim['walk'].play()
 
     const sk = new Form({ game: this.game, x: this.game.world.width, y: subject.y })
     sk.anim['go'].play()
@@ -28,8 +28,8 @@ export default class extends Sprite {
       .chain(this.game.add.tween(sk)
         .to({ 'x': this.pointOfAction.x }, 4000 * (1 - _dt), Easing.Linear.None, false))
 
-    const _t02 = this.game.add.tween(subject)
-      .to({ 'x': this.pointOfAction.x - 50 }, 4000, Easing.Linear.None, false)
+    // const _t02 = this.game.add.tween(subject)
+      // .to({ 'x': this.pointOfAction.x - 50 }, 4000, Easing.Linear.None, false)
 
     const _t11 = this.game.add.tween(sk)
       .to({ 'x': -100 }, 4000, Easing.Linear.None, false)
@@ -41,10 +41,10 @@ export default class extends Sprite {
         _t11.start()
       }, this)
     })
-    _t02.onComplete.add(() => { subject.anim['brokenleg'].play() })
+    _t01.onComplete.add(() => { subject.anim['brokenleg'].play() })
 
     this.startingPoint = _t01
-    this.startingPoint.onStart.add(() => { _t02.start() })
+    // this.startingPoint.onStart.add(() => { _t02.start() })
   }
 
   play () {

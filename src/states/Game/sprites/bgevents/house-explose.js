@@ -30,13 +30,13 @@ export default class extends Sprite {
 
   play () {
     this.house0.destroy()
+    this.activated = true
 
     this.explose.alpha = 1
     this.explose.addAnimation({name: 'vzryv_2', offset: 0, length: 20, speed: 12, loop: false})
     this.addChild(this.explose)
     this.explose.anim['vzryv_2'].onComplete.add(() => {
       this.explose.destroy()
-      this.activated = true
       this.house1 = new Sprite(this.game, 0, 0, 'explosed-1')
       this.house1.scale.setTo(0.5)
       this.house1.anchor.setTo(0, 1)
@@ -51,7 +51,6 @@ export default class extends Sprite {
     })
 
     this.explose.anim['vzryv_2'].play()
-    this.activated = false
-    this.game.camera.shake(0.1, 2000)
+    this.game.camera.shake(0.075, 2000)
   }
 }

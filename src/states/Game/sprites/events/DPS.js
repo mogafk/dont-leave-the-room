@@ -17,7 +17,7 @@ export default class extends Sprite {
 
     const subject = hero || new Hero({ game: this.game, x: 0, y: this.game.world.centerY })
     this.toDebug = subject
-    subject.anim['walk'].play()
+    // subject.anim['walk'].play()
     this.addChild(subject)
 
     const dps = new Animated({
@@ -31,17 +31,19 @@ export default class extends Sprite {
     dps.addAnimation({name: 'siren', length: 12, speed: 12, loop: true})
     dps.anim['siren'].play()
 
+
     const ment1 = new Ment({ game: this.game, x: dps.x, y: dps.y })
     ment1.scale.setTo(1.33)
     ment1.turn.rotate()
-
     this.addChild(ment1)
+    ment1.alpha = 0
 
     const ment2 = new Ment({ game: this.game, x: dps.x - 50, y: dps.y })
     ment2.scale.setTo(1.33)
     ment2.turn.rotate()
-
     this.addChild(ment2)
+    ment2.alpha = 0
+
     this.addChild(dps)
 
     subject.bringToTop()
@@ -75,6 +77,8 @@ export default class extends Sprite {
       subject.anim['photo'].play()
     }, this)
     subject.anim['photo'].onComplete.add(() => {
+      ment1.alpha = 1
+      // ment2.alpha = 1
       _t01.start()
     }, this)
 

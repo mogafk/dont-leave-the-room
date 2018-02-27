@@ -52,7 +52,13 @@ export default class extends Phaser.State {
     this.game.load.image('sight-2', 'backgrounds/sight-2.png')
     this.game.load.image('house-police', 'backgrounds/police.png')
     this.game.load.image('house-0', 'backgrounds/house-0.png')
-    this.game.load.audio('main-theme', 'sound/main-theme.mp3')
+    this.game.load.image('houses-2-1', 'backgrounds/houses-2-1.png')
+    this.game.load.image('houses-2-2', 'backgrounds/houses-2-2.png')
+    this.game.load.image('musor', 'backgrounds/musor.png')
+    this.game.load.image('ui-plashka', 'ui/plashka.png')
+    this.game.load.image('ui-death', 'ui/death.png')
+    this.game.load.audio('main-theme', ['sound/main-theme.mp3', 'sound/main-theme.ogg'])
+    this.game.load.audio('shag-intro', ['sound/shag-intro.mp3', 'sound/shag-intro.ogg'])
     this.game.load.audio('event1', 'sound/event1.mp3')
   }
 

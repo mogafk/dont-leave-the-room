@@ -2,7 +2,9 @@
 import Phaser from 'phaser'
 
 import Background from './sprites/Background'
-import { BGMontirovka } from './sprites/bgevents'
+import { BGMontirovka, BGIcicle } from './sprites/bgevents'
+
+import { DPS } from './sprites/events'
 
 export default class extends Phaser.State {
   init () {
@@ -10,9 +12,9 @@ export default class extends Phaser.State {
   }
 
   preload () {
-    // BGMontirovka.getAssets().map(el => {
-    //   this.game.load.atlasJSONHash(...el)
-    // })
+    DPS.getAssets().map(el => {
+      this.game.load.atlasJSONHash(...el)
+    })
 
     this.game.load.atlasJSONHash('montirovka-car', 'events/montirovka_car.png', 'events/montirovka_car.json')
     this.game.load.atlasJSONHash('montirovka-man', 'persons/montirovka.png', 'persons/montirovka.json')
@@ -38,7 +40,7 @@ export default class extends Phaser.State {
     this.layer4.y = this.game.world.height - 100
 
     this.eventObservers = []
-    let _bgevents = [BGMontirovka] //  Phaser.ArrayUtils.shuffle(BGEVENTS)
+    let _bgevents = [BGIcicle] //  Phaser.ArrayUtils.shuffle(BGEVENTS)
     const createBGEvent = () => {
       if (_bgevents.length <= 0) return false
       const Constructor = _bgevents.pop()
@@ -52,6 +54,9 @@ export default class extends Phaser.State {
     }
 
     createBGEvent()
+
+    this.dps = new DPS({game: this.game})
+    this.dps.play()
 
     // this.dps = new DPS({ game: this.game })
     // this.dps.play()

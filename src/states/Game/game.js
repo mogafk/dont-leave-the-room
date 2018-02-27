@@ -14,7 +14,7 @@ const BGEVENTS = [BGIcicle, BGMontirovka, BGPolice, BGRape, BGCroc, BGBaby, BGEx
 
 export default class extends Phaser.State {
   init () {
-    this.stage.backgroundColor = Phaser.Color.RGBtoString(79, 72, 74) //  '#4f484'
+    this.stage.backgroundColor = 0x000000
   }
 
   preload () {
@@ -29,11 +29,21 @@ export default class extends Phaser.State {
   }
 
   create () {
+    this.stage.backgroundColor = Phaser.Color.RGBtoString(79, 72, 74) //  '#4f484'
+
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     this.game.input.keyboard.addKeyCapture(Phaser.Keyboard.SPACEBAR)
 
     this.isMove = false
-    this.block = false
+    this.block = true
+
+    this.music = this.game.add.audio('main-theme')
+    this.music.play()
+
+    this.game.camera.flash(0x000000, 4000)
+    this.game.camera.onFlashComplete.add(() => {
+      this.block = false
+    }, this)
 
     this.background = new Background(this.game)
 
@@ -41,7 +51,7 @@ export default class extends Phaser.State {
     this.layer4.y = this.game.world.height - 100
 
     this.eventObservers = []
-    let _bgevents = [BGRape] //  Phaser.ArrayUtils.shuffle(BGEVENTS)
+    let _bgevents = [] //  Phaser.ArrayUtils.shuffle(BGEVENTS)
     const createBGEvent = () => {
       if (_bgevents.length <= 0) _bgevents = Phaser.ArrayUtils.shuffle([...BGEVENTS])
       const Constructor = _bgevents.pop()
@@ -80,17 +90,48 @@ export default class extends Phaser.State {
     )
 
     const endSession = () => {
-      this.buttonReplay = this.game.add.button(
-        this.game.world.width - 150,
-        50,
-        'buttonReplay',
-        () => this.state.start('Game'))
-      this.buttonReplay.scale.setTo(0.5)
+      this.game.time.events.add(Phaser.Timer.SECOND * 3, showDeathImage, this)
+    }
+
+    const showDeathImage = () => {
+      const _img = this.game.add.sprite(
+        this.game.camera.width / 2,
+        this.game.camera.height / 2,
+        'ui-death'
+      )
+      const _scaleW = this.game.width / _img.width
+      const _scaleH = this.game.height / _img.height
+      _img.scale.setTo(Math.max(_scaleW, _scaleH))
+      _img.anchor.setTo(0.5)
+      _img.alpha = 0
+      const _t0 = this.game.add.tween(_img)
+        .to({ 'alpha': 1 }, 1000, Phaser.Easing.Linear.None, false)
+      _t0.start()
+      _t0.onComplete.add(() => {
+        this.buttonReplay = this.game.add.button(
+          this.game.world.width - 150,
+          50,
+          'buttonReplay',
+          () => {
+            this.music.destroy()
+            this.state.start('Game')
+          })
+        this.buttonReplay.scale.setTo(0.5)
+      }, this)
     }
 
     const shitHappensEvent = () => {
+      this.hero.anim['stop'].play()
+      // this.game.time.events.add(
+      //   Phaser.Timer.SECOND * 1,
+      //   () => {
+      //     this.hero.animation.stop()
+      //     this.isMove = false
+      //   },
+      //   this
+      // )
       this.block = true
-      this.isMove = false
+      this.isMove = true
       this.game.rnd.pick(scenarios)()
       this.game.world.bringToTop(this.layer5)
       this.hero.anim['death'].onComplete.add(endSession, this)
@@ -117,12 +158,12 @@ export default class extends Phaser.State {
   update () {
     if (this.isMove) {
       this.background.move()
-      this.layer4.addAll('x', -4)
+      this.layer4.addAll('x', -1.1)
 
       this.eventObservers.map(el => {
         if (el) {
           if (!el.activated) {
-            if (el.x < this.hero.x) { //  this.game.world.centerX
+            if (el.x < this.game.camera.width / 2) { //  this.game.world.centerX
               el.play()
             }
           }

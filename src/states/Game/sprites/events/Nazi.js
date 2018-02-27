@@ -16,7 +16,7 @@ export default class extends Sprite {
 
     const subject = hero || new Hero({ game: this.game, x: 0, y: this.game.world.centerY })
     this.toDebug = subject
-    subject.anim['walk'].play()
+    // subject.anim['walk'].play()
     this.addChild(subject)
 
     const fsb = new Nazi({ game: this.game, x: this.game.world.width, y: subject.y })
@@ -32,8 +32,8 @@ export default class extends Sprite {
       .chain(this.game.add.tween(fsb)
         .to({ 'x': this.pointOfAction.x }, 2000 * (1 - _dt), Easing.Linear.None, false))
 
-    const _t02 = this.game.add.tween(subject)
-      .to({ 'x': this.pointOfAction.x - 50 }, 2000, Easing.Linear.None, false)
+    // const _t02 = this.game.add.tween(subject)
+      // .to({ 'x': this.pointOfAction.x - 50 }, 2000, Easing.Linear.None, false)
 
     const _t11 = this.game.add.tween(fsb)
       .to({ 'x': -100 }, 4000, Easing.Linear.None, false)
@@ -49,7 +49,7 @@ export default class extends Sprite {
     // _t02.onComplete.add(() => { subject.anim['death'].play() })
 
     this.startingPoint = _t01
-    this.startingPoint.onStart.add(() => { _t02.start() })
+    // this.startingPoint.onStart.add(() => { _t02.start() })
 
     this.game.add.existing(this)
   }

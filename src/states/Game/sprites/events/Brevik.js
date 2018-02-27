@@ -15,7 +15,7 @@ export default class extends Phaser.Sprite {
 
     const subject = hero || new Hero({ game: this.game, x: 0, y: this.game.world.centerY })
     this.toDebug = subject
-    subject.anim['walk'].play()
+    // subject.anim['walk'].play()
     this.addChild(subject)
 
     this.brevik = new Brevik({

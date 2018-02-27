@@ -22,8 +22,8 @@ export default class extends Sprite {
 
     this.faller = new Animated({
       game: this.game,
-      x: 0,
-      y: 0,
+      x: this.back.width / 2,
+      y: this.back.top,
       asset: 'icicle',
       anchor: new Point(0.5, 1)
     })
@@ -47,16 +47,16 @@ export default class extends Sprite {
     const _dt = 0.8
     const _t00 = this.startingPoint = this.game.add
       .tween(this.men)
-      .to({ 'x': this.men.x - ((this.men.x - this.pointOfAction.x) * _dt) }, 4000 * _dt, Easing.Linear.None, false)
+      .to({ 'x': this.men.x - ((this.men.x - this.faller.x) * _dt) }, 4000 * _dt, Easing.Linear.None, false)
     const _t01 = this.game.add
       .tween(this.men)
-      .to({ 'x': this.pointOfAction.x }, 4000 * (1 - _dt), Easing.Linear.None, false)
+      .to({ 'x': this.faller.x }, 4000 * (1 - _dt), Easing.Linear.None, false)
     const _t1 = this.game.add
       .tween(this.faller)
-      .to({ 'y': this.pointOfAction.y * 0.95 }, 2000 * 0.95, Easing.Linear.None, false)
+      .to({ 'y': this.pointOfAction.y * 0.99 }, 500 * 0.99, Easing.Linear.None, false, 3000)
     const _t2 = this.game.add
       .tween(this.faller)
-      .to({ 'y': this.pointOfAction.y + 25 }, 2000 * 0.05, Easing.Bounce.Out, false)
+      .to({ 'y': this.pointOfAction.y + 50 }, 500 * 0.01, Easing.Bounce.Out, false)
 
     _t00.onStart.add(() => {
       _t1.start()

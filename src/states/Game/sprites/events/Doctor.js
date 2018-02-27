@@ -19,7 +19,7 @@ export default class extends Sprite {
     this.addChild(this.hero)
 
     this.doctor = new Doctor({ game: this.game, x: this.game.world.width, y: this.hero.y })
-    this.doctor.anim['go'].play()
+    // this.doctor.anim['go'].play()
 
     this.hero.bringToTop()
 
@@ -33,8 +33,8 @@ export default class extends Sprite {
           'x': this.pointOfAction.x
         }, 4000 * (1 - _dt), Easing.Linear.None, false))
 
-    const _t02 = this.game.add.tween(this.hero)
-      .to({ 'x': this.pointOfAction.x - 50 }, 4000, Easing.Linear.None, false)
+    // const _t02 = this.game.add.tween(this.hero)
+      // .to({ 'x': this.pointOfAction.x - 50 }, 4000, Easing.Linear.None, false)
 
     const _t11 = this.game.add.tween(this.doctor)
       .to({ 'x': -100 }, 4000, Easing.Linear.None, false)
@@ -46,10 +46,10 @@ export default class extends Sprite {
         _t11.start()
       }, this)
     })
-    _t02.onComplete.add(() => { this.hero.anim['death'].play() })
+    _t01.onComplete.add(() => { this.hero.anim['death'].play() })
 
     this.startingPoint = _t01
-    this.startingPoint.onStart.add(() => { _t02.start() })
+    // this.startingPoint.onStart.add(() => { _t02.start() })
 
     this.game.add.existing(this)
   }

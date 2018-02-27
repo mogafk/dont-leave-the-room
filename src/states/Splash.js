@@ -1,15 +1,40 @@
 import { State } from 'phaser'
 // import { centerGameObjects } from '../utils'
+import show from './Modal'
+
+console.log(show)
 
 export default class extends State {
   init () {}
 
   preload () {
+    show(49)
     // centerGameObjects([this.loaderBg, this.loaderBar])
     // this.load.setPreloadSprite(this.loaderBar)
+    this.game.load.image('splash-screen', './assets/splash.png')
+    this.game.load.atlasJSONArray('splash-button', './assets/ui/splash-button.png', './assets/ui/splash-button.json')
   }
 
   create () {
-    this.state.start('Game')
+    this.splash = this.game.add.sprite(this.game.camera.width / 2, this.game.camera.height / 2, 'splash-screen')
+    this.splash.anchor.setTo(0.5)
+    const _scaleW = this.game.camera.width / this.splash.width
+    const _scaleH = this.game.camera.height / this.splash.height
+    this.splash.scale.setTo(Math.max(_scaleW, _scaleH))
+
+    const button1 = this.game.add.button(
+      this.game.camera.width * 0.5,
+      this.game.camera.height * 0.75,
+      'splash-button',
+      () => { this.state.start('Boot') },
+      this,
+      'button-start-0.png', 'button-start-0.png', 'button-start-1.png', 'button-start-0.png')
+    button1.anchor.setTo(0.5, 0.5)
+    const _scaleBW = this.game.camera.width / button1.width
+    const _scaleBH = this.game.camera.height / button1.height
+    button1.scale.setTo(Math.max(_scaleBW, _scaleBH) * 0.15)
+    // button1.scale.setTo(0.25)
+
+    // 
   }
 }

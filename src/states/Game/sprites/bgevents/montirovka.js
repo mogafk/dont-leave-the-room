@@ -5,7 +5,10 @@ export default class extends Sprite {
   constructor (props) {
     super(props)
 
+    this.activated = false
     this.onDestroyed = new Signal()
+
+    this.walkaway = false
 
     const car = new Animated({
       game: this.game,
@@ -40,8 +43,8 @@ export default class extends Sprite {
     const _t1 = this.startingPoint = this.game.add.tween(man)
       .to({'x': (car.x + 200)}, 4000, Easing.Linear.None, false)
 
-    const _t2 = this.game.add.tween(man)
-      .to({'x': -100}, 1000, Easing.Linear.None, false)
+    // const _t2 = this.game.add.tween(man)
+    //   .to({'x': -100}, 1000, Easing.Linear.None, false)
 
     _t1.onComplete.add(() => {
       man.anim['hit'].play()
@@ -54,16 +57,26 @@ export default class extends Sprite {
 
     man.anim['goAfterHit'].onComplete.add(() => {
       man.anim['go'].play()
-      _t2.start()
+      this.walkaway = true
+      // _t2.start()
     }, this)
 
     this.game.add.existing(this)
     this.y += 50
 
     man.anim['go'].play()
+
+    this.man = man
   }
 
   play () {
     this.startingPoint.start()
+    this.activated = true
+  }
+
+  update () {
+    if (this.walkaway) {
+      this.man.x -= 1
+    }
   }
 }
