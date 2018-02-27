@@ -12,7 +12,7 @@ import { Brevik, Doctor, DPS, FSB, Nazi, Rifle, SK } from './sprites/events'
 import { BGBaby, BGCroc, BGExplose, BGIcicle, BGMontirovka, BGPolice, BGRape } from './sprites/bgevents'
 
 const EVENTS = [DPS, Doctor, FSB, Rifle, SK, Brevik, Nazi]
-// const EVENTS = [Doctor]
+// const EVENTS = [SK]
 const BGEVENTS = [BGIcicle, BGMontirovka, BGPolice, BGRape, BGCroc, BGBaby, BGExplose]
 
 export default class extends Phaser.State {
@@ -97,8 +97,10 @@ export default class extends Phaser.State {
     }
 
     const showDeathImage = () => {
+      const _val = this.chance.steps.getValue()
+      console.log('_val:', _val)
       showModal(
-        this.chance.getSteps(),
+        _val,
         () => this.state.start('Game')
       )
       // const _img = this.game.add.sprite(

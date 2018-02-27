@@ -76,9 +76,8 @@ export default class extends Group {
     stepCounter.anchor.setTo(1, 0.5)
     stepCounter.x = this.bg.right - 20
 
-    const steps = new Steps()
-    this._steps = steps
-    stepCounter.setText(`${steps.getValue()}`)
+    this.steps = new Steps()
+    stepCounter.setText(`${this.steps.getValue()}`)
 
     const eventsText = game.add.text(
       game.world.centerX,
@@ -98,7 +97,7 @@ export default class extends Group {
     }
 
     this.increment = () => {
-      const step = steps.increment()
+      const step = this.steps.increment()
       let choice = chance.getChoice()
       if (choice) this.onEvent.dispatch()
       stepCounter.setText(`${step}`)
@@ -110,9 +109,5 @@ export default class extends Group {
       animation.onUpdateCallback(() => printText(a.val), this)
     }
     printText()
-  }
-
-  getSteps () {
-    this._steps.getValue()
   }
 }

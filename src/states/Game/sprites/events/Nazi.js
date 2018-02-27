@@ -26,11 +26,12 @@ export default class extends Sprite {
 
     subject.bringToTop()
 
-    const _dt = 0.85
     const _t01 = this.game.add.tween(fsb)
-      .to({ 'x': (fsb.x - this.subject.x * _dt) }, 2000 * _dt, Easing.Linear.None, false)
-      .chain(this.game.add.tween(fsb)
-        .to({ 'x': this.subject.x }, 2000 * (1 - _dt), Easing.Linear.None, false))
+      .to(
+        { 'x': subject.x + 55 },
+        4000,
+        Easing.Linear.None,
+        false)
 
     // const _t02 = this.game.add.tween(subject)
       // .to({ 'x': this.pointOfAction.x - 50 }, 2000, Easing.Linear.None, false)
