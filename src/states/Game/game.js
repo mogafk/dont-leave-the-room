@@ -32,6 +32,7 @@ export default class extends Phaser.State {
     GAGameStart()
     this.stage.backgroundColor = Phaser.Color.RGBtoString(79, 72, 74) //  '#4f484'
 
+    this.sessionStartTimestamp = this.game.time.totalElapsedSeconds()
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     this.game.input.keyboard.addKeyCapture(Phaser.Keyboard.SPACEBAR)
 
@@ -97,7 +98,11 @@ export default class extends Phaser.State {
 
     const showDeathImage = () => {
       const _val = this.chance.steps.getValue()
-      GAGameEnd()
+      GAGameEnd(
+        Math.round(this.game.time.totalElapsedSeconds() - this.sessionStartTimestamp, 1),
+        Math.round(this.game.time.totalElapsedSeconds(), 1),
+        _val
+      )
       showModal({
         step: _val,
         story: this.deathEvent.story,

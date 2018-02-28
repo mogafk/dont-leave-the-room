@@ -68,7 +68,6 @@ export default class extends State {
     //   cb: () => {}
     // })
     this.music = this.game.add.audio('shag-intro')
-    this.music.play('', 0, 1, false)
 
     this.letGoSFX = this.game.add.audio('let-go-sound')
     this.stayHomeSFX = this.game.add.audio('stay-home-sound')
@@ -125,6 +124,10 @@ export default class extends State {
       }
     } while (_arr.length > 0)
     this._frame.start()
+    // this._frame.onStart.add(() => {
+    //   this.music.play('', 0, 1, false)
+    // })
+    this.music.play('', 0, 1, false)
 
     this.game.add.existing(new Mute(this.game))
   }

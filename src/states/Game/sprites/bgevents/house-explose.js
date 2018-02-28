@@ -33,7 +33,7 @@ export default class extends Sprite {
   play () {
     this.house0.destroy()
     this.activated = true
-    this.sfx.play('', 0, 1, false)
+    this.sfx.play('', 0, 0.75, false)
 
     this.explose.alpha = 1
     this.explose.addAnimation({name: 'vzryv_2', offset: 0, length: 20, speed: 12, loop: false})
