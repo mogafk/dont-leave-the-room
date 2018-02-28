@@ -11,6 +11,9 @@ export default class extends Sprite {
 
     this.onDestroyed = new Signal()
 
+    this.sfx = this.game.add.audio('croc')
+    this.sfx.allowMultiple = true
+
     this.anchor.setTo(0, 1)
     this.addChild(this.back)
     this.back.anchor.setTo(0, 1)
@@ -64,8 +67,11 @@ export default class extends Sprite {
       Easing.Back.In,
       false
       )
+    _p0.onStart.add(() => {
+      setTimeout(() => {this.sfx.play('', 0, 1, false)}, 800)
+    }, this)
 
-      //  Человек выходит из подъезда
+    //  Человек выходит из подъезда
     const _p01 = this.game.add
       .tween(this.men)
       .to({

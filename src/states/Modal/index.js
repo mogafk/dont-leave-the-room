@@ -5,12 +5,8 @@ import style from 'style-loader!css-loader!./style.css'
 
 const template = Handlebars.compile(rawTemplate)
 
-// template({'variable':'NJNJNJNJ'})
-// console.log(template({'variable': 'NJNJNJNJ'}))
-
-export default (step, cb) => {
+export default ({step, cb, story}) => {
   var res = {'currentURL': encodeURIComponent(window.location.href + `?step=${step}&_share=1`)}
-  console.log('STEPS:', step)
   if (step <= 0) {
     res['background'] = './assets/results/stay-home.png'
     res['title'] = 'Вы победили!'
@@ -33,6 +29,12 @@ export default (step, cb) => {
     res['background'] = './assets/results/over100.png'
     res['title'] = 'Вы умерли!'
     res['text'] = 'Остаться дома - самый правильный вариант! поделитесь своей победой с друзьями!'
+  }
+
+  if (story) {
+    res['customHead'] = story.title || ''
+    res['customDate'] = story.date || ''
+    res['customText'] = story.text || ''
   }
 
   var html = template(res)

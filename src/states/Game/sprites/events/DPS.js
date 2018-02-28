@@ -15,6 +15,12 @@ export default class extends Sprite {
 
     this.pointOfAction = new Point(this.game.world.centerX - 100, this.game.world.centerY)
 
+    this.story = {
+      title: 'Сотрудники ДПС в Перми избили сфотографировавшего их автомобиль прохожего',
+      date: '25 марта 2015',
+      text: 'По словам Михаила Матросова, он решил сфотографировать на мобильный телефон стоящий за гаражами патрульный автомобиль ДПС. Сотрудник полиции попытался вырвать телефон, а когда это сделать не удалось, потребовал удалить снимки и позвал своего напарника, вместе с которым они начали избивать Матросова. В результате тот был госпитализирован с диагнозом «сотрясение головного мозга».'
+    }
+
     const subject = hero || new Hero({ game: this.game, x: 0, y: this.game.world.centerY })
     this.toDebug = subject
     // subject.anim['walk'].play()
@@ -31,9 +37,8 @@ export default class extends Sprite {
     dps.addAnimation({name: 'siren', length: 12, speed: 12, loop: true})
     dps.anim['siren'].play()
 
-
     const ment1 = new Ment({ game: this.game, x: dps.x, y: dps.y })
-    ment1.scale.setTo(1.33)
+    ment1.scale.setTo(1.35)
     ment1.turn.rotate()
     this.addChild(ment1)
     ment1.alpha = 0
@@ -50,16 +55,16 @@ export default class extends Sprite {
 
     const _t01 = this.game.add.tween(ment1)
       .to({
-        'x': subject.x + 50,
+        'x': subject.x + 75,
         'y': subject.y
       }, 3000, Easing.Linear.None, false)
     const _t02 = this.game.add.tween(ment1.scale)
-      .to({ 'x': -1, 'y': 1 }, 3000, Easing.Linear.None, false)
+      .to({ 'x': -1.175, 'y': 1.175 }, 3000, Easing.Linear.None, false)
 
     const _t03 = this.game.add.tween(ment2)
       .to({
-        'x': subject.x + 60,
-        'y': subject.y + 5
+        'x': subject.x + 75,
+        'y': subject.y + 15
       }, 3300, Easing.Linear.None, false)
     const _t04 = this.game.add.tween(ment2.scale)
       .to({
@@ -79,6 +84,7 @@ export default class extends Sprite {
     subject.anim['photo'].onComplete.add(() => {
       ment1.alpha = 1
       // ment2.alpha = 1
+      subject.anim['stand'].play()
       _t01.start()
     }, this)
 
@@ -100,6 +106,7 @@ export default class extends Sprite {
 
     ment2.anim['hit'].onComplete.add(() => {
       subject.anim['death'].play()
+      ment1.anim['stand'].play()
     })
 
     this.startingPoint = _t00

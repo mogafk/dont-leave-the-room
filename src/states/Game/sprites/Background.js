@@ -1,7 +1,6 @@
 import { Animation } from 'phaser'
 import Layer from './Layer'
 
-
 const velocity = 0.3
 export default (game) => {
   const layer1 = new Layer({
@@ -28,18 +27,6 @@ export default (game) => {
     layer2.ganerateTile()
   }
 
-  // const layer3 = new Layer({
-  //   game: game,
-  //   asset: 'background',
-  //   tiles: Animation.generateFrameNames('doma-tile', 1, 1, '.png'),
-  //   speed: -1.25,
-  //   scale: 1,
-  //   anchor: (0.5, 0)
-  // })
-  // for (let i = 0; i < 10; i++) {
-  //   layer2.ganerateTile()
-  // }
-
   const zabor = game.add.tileSprite(
     0,
     180,
@@ -59,7 +46,7 @@ export default (game) => {
   )
   const doma2 = game.add.tileSprite(
     0,
-    80,
+    80 + 5,
     game.world.width,
     265,
     'houses-2-2'
@@ -67,9 +54,34 @@ export default (game) => {
   doma2.tilePosition.x += 200
   // zabor.tileScale.setTo(0.25)
 
+  const houseNamesArray = [
+    'house-2', 'house-3', 'house-4', 'house-5', 'house-6', 'house-7', 'house-8', 'house-9',
+    'barber', 'garage', 'hospital', 'pizza', 'shop', 'sight-1', 'stop', 'trashcan'
+  ]
+  const layer3 = game.add.group()
+  const create3LayerHome = (offset = 0) => {
+    const _house = game.add.sprite(offset, 0, 'houses', game.rnd.pick(houseNamesArray))
+    _house.anchor.setTo(0, 1)
+    _house.scale.setTo(0.85)
+    layer3.add(_house)
+  }
+  create3LayerHome()
+
+  game.add.existing(layer3)
+  layer3.y = game.camera.height - 100
+  layer3.update = () => {
+    const _s = layer3.getTop()
+    if (layer3.getTop()) {
+      if (_s.x < (-1 * _s.width)) {
+        _s.destroy()
+        create3LayerHome(game.rnd.integerInRange(game.camera.width * 1, game.camera.width * 1.5))
+      }
+    }
+  }
+
   const musor = game.add.tileSprite(
     0,
-    game.world.height - 100,
+    game.world.height - 80,
     game.world.width,
     90,
     'musor'
@@ -82,6 +94,7 @@ export default (game) => {
       zabor.tilePosition.x -= velocity * 9
       doma.tilePosition.x -= velocity * 2.5
       doma2.tilePosition.x -= velocity * 2.9
+      layer3.addAll('x', -1 * velocity * 3.3)
       musor.tilePosition.x -= velocity * 3.85
     }
   }

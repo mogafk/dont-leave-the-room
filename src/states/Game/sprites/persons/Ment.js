@@ -17,5 +17,6 @@ export default class extends Animated {
     this.addAnimation({ name: 'hit', length: 24, speed: 24 })
     this.addAnimation({ name: 'naruchniki', length: 40, speed: 24 })
     this.addAnimation({ name: 'stop', length: 12, speed: 24 })
+    this.addAnimation({ name: 'stand', prefix: 'go_', offset: 10, length: 12, speed: 12 })
   }
 }

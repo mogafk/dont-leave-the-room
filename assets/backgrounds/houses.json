@@ -184,6 +184,6 @@
 	"image": "houses.png",
 	"format": "RGBA8888",
 	"size": {"w":2012,"h":1773},
-	"scale": "0.5"
+	"scale": "1"
 }
 }
