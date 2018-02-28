@@ -5,7 +5,7 @@ import Hero from './sprites/persons/Hero'
 import Background from './sprites/Background'
 import showModal from '.././Modal'
 import Mute from './sprites/Mute'
-import { GAGameStart, GAGameEnd, GAGameReset } from '.././Anal'
+import { GAGameStart, GAGameEnd, GAGameReset } from '.././Analit'
 import { Brevik, Doctor, DPS, FSB, Nazi, Rifle, SK } from './sprites/events'
 import { BGBaby, BGCroc, BGExplose, BGIcicle, BGMontirovka, BGPolice, BGRape } from './sprites/bgevents'
 
