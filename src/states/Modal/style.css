@@ -51,13 +51,13 @@
       margin-right: 40px;
     } */
     .game-end_picture {
-      min-height: 400px;
+      min-height: 300px;
       width: 100%;
       background: #ccc;
       background-size: cover;
     }
     .game-end_content {
-      padding: 35px 40px 30px 40px;
+      padding: 35px 40px 5px 40px;
     }
     .game-end_header {
       font-size: 20px;
@@ -72,7 +72,7 @@
       margin-top: 30px;
     }
     .game-end_replay {
-      margin-top: 40px;
+      margin-top: 10px;
     }
     .game-end_score {
       margin-top: 40px;

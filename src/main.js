@@ -6,14 +6,17 @@ import BootState from './states/Boot'
 import SplashState from './states/Splash'
 import GameState from './states/Game'
 import InrtoState from './states/Intro'
-import config from './config'
+// import config from './config'
 
 class Game extends Phaser.Game {
   constructor (container) {
     const docElement = document.documentElement
-    const width = Math.min(docElement.clientWidth, config.gameWidth)
-    const height = Math.min(docElement.clientHeight, config.gameHeight)
+    // const width = Math.min(docElement.clientWidth, config.gameWidth)
+    // const height = Math.min(docElement.clientHeight, config.gameHeight)
+    const width = Math.max(Math.min(docElement.clientWidth, 660), 320)
+    const height = Math.max(Math.min(docElement.clientHeight, 600), 500)
     super(width, height, Phaser.Canvas, container || 'content', null)
+
 
     this.pixelRatio = window.devicePixelRatio
 

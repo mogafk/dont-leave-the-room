@@ -9,6 +9,7 @@ export default class extends Sprite {
     this.onDestroyed = new Signal()
     this.sfx = this.game.add.audio('explosion')
     this.sfx.allowMultiple = true
+    this.storyMessage = '«Иду мимо, и вдруг — взрыв» — случайный прохожий едва не пострадал при взрыве в жилом доме в Петербурге'
 
     this.anchor.setTo(0, 1)
     this.house0 = new Sprite(this.game, 0, 0, 'explosed-0')
@@ -33,7 +34,7 @@ export default class extends Sprite {
   play () {
     this.house0.destroy()
     this.activated = true
-    this.sfx.play('', 0, 1, false)
+    this.sfx.play('', 0, 0.75, false)
 
     this.explose.alpha = 1
     this.explose.addAnimation({name: 'vzryv_2', offset: 0, length: 20, speed: 12, loop: false})

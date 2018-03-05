@@ -8,6 +8,7 @@ export default class extends Sprite {
     this.activated = false
 
     this.onDestroyed = new Signal()
+    this.storyMessage = 'В Курске с крыши магазина упала ледяная глыба, пострадал прохожий'
 
     //  добавляю задник
     this.back = this.game.add.sprite(0, 0, 'house-0')

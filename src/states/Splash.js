@@ -1,4 +1,4 @@
-import { State } from 'phaser'
+import { State, Cache } from 'phaser'
 // import { centerGameObjects } from '../utils'
 import Mute from './Game/sprites/Mute'
 

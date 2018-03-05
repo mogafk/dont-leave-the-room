@@ -27,6 +27,10 @@ export default class extends Phaser.State {
     this.game.load.baseURL = '/dont_leave_room/assets/'
 
 
+    this.game.load.image('splash-screen', 'splash.png')
+    this.game.load.atlasJSONArray('splash-button', 'ui/splash-button.png', 'ui/splash-button.json')
+    this.game.load.atlasJSONArray('button-mute', 'ui/button-mute.png', 'ui/button-mute.json')
+
     this.game.load.atlasJSONHash('background', 'backgrounds/asset2.png', 'backgrounds/asset2.json')
     this.game.load.atlasJSONHash('houses', 'backgrounds/houses.png', 'backgrounds/houses.json')
     this.game.load.atlasJSONHash('rape', 'events/rape.png', 'events/rape.json')
@@ -53,6 +57,10 @@ export default class extends Phaser.State {
     this.game.load.image('houses-2-2', 'backgrounds/houses-2-2.png')
     this.game.load.image('musor', 'backgrounds/musor.png')
     this.game.load.image('ui-plashka', 'ui/plashka.png')
+    this.game.load.image('ui-tiker', 'ui/tiker.png')
+    this.game.load.image('button-restart', 'ui/restart.png')
+    this.game.load.image('logo', 'logo.png')
+
     this.game.load.audio('main-theme', ['sound/main-theme.mp3', 'sound/main-theme.ogg'])
     this.game.load.audio('machine-gun', ['sound/machine-gun-loop.mp3', 'sound/machine-gun-loop.ogg'])
     this.game.load.audio('glass-smash', ['sound/glass-smash-bottle-h.mp3', 'sound/glass-smash-bottle-h.ogg'])

@@ -2,6 +2,22 @@ import { State, Animation, Easing, ArrayUtils } from 'phaser'
 import show from './Modal'
 import Mute from './Game/sprites/Mute'
 
+const LSCounter = (name) => {
+  const itemName = name //  'dontleave_daysAtHome'
+  return {
+    get: () => {
+      return localStorage.getItem(itemName) || 0
+    },
+    increment: () => {
+      const _v = localStorage.getItem(itemName) || 0
+      localStorage.setItem(itemName, parseInt(_v, 10) + 1)
+    },
+    reset: () => {
+      localStorage.setItem(itemName, 0)
+    }
+  }
+}
+
 export default class extends State {
   init () { }
 
@@ -67,8 +83,8 @@ export default class extends State {
     // video({
     //   cb: () => {}
     // })
+    this.game.sound.stopAll()
     this.music = this.game.add.audio('shag-intro')
-    this.music.play('', 0, 1, false)
 
     this.letGoSFX = this.game.add.audio('let-go-sound')
     this.stayHomeSFX = this.game.add.audio('stay-home-sound')
@@ -82,10 +98,21 @@ export default class extends State {
     this.back.scale.setTo(Math.max(_scaleW, _scaleH))
 
     const generateButtons = () => {
+      const _stayAtHomeCapture = this.game.add.text(
+        this.game.camera.width / 2,
+        40,
+        `Оставался дней дома - ${this.dayAtHomeCounter.get()}`,
+        {
+          font: '30pt Courier',
+          fill: 'white',
+          align: 'center'
+        })
+      _stayAtHomeCapture.anchor.setTo(0.5)
       const button1 = this.game.add.button(
         this.game.world.centerX,
         this.game.world.centerY - 50,
         'buttons', () => {
+          this.dayAtHomeCounter.reset()
           this.letGoSFX.play('', 0, 1, false)
           this.framesGo()
           this.disableButtons()
@@ -102,7 +129,10 @@ export default class extends State {
           this.stayHomeSFX.play('', 0, 1, false)
           show({
             step: 0,
-            cb: () => { this.state.start('Intro') }
+            cb: () => {
+              this.dayAtHomeCounter.increment()
+              this.state.start('Intro')
+            }
           })
         },
         this,
@@ -116,6 +146,8 @@ export default class extends State {
       }
     }
 
+    this.dayAtHomeCounter = new LSCounter('dontleave_daysAtHome')
+
     const _arr = ArrayUtils.numberArray(1, 22)
     this._frame = undefined
     do {
@@ -125,6 +157,10 @@ export default class extends State {
       }
     } while (_arr.length > 0)
     this._frame.start()
+    // this._frame.onStart.add(() => {
+    //   this.music.play('', 0, 1, false)
+    // })
+    this.music.play('', 0, 1, false)
 
     this.game.add.existing(new Mute(this.game))
   }

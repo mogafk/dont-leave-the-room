@@ -10,6 +10,7 @@ export default class extends Sprite {
 
     this.sfx = this.game.add.audio('fall-with-impact')
     this.sfx.allowMultiple = true
+    this.storyMessage = 'В Ленинградской области расследуют гибель местного жителя, выпрыгнувшего из окна отдела полиции после допроса.  Мужчину, лежащего в луже крови под окнами здания ОМВД на улице Кирова, заметили прохожие.'
 
     //  добавляю задник
     this.back = this.game.add.sprite(0, 0, 'house-police')

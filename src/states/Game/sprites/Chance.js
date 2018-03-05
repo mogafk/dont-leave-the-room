@@ -1,3 +1,4 @@
+/* globals __DEV__ */
 import {Easing, Group, Utils, Signal} from 'phaser'
 
 const FONT_STYLE = {
@@ -23,8 +24,12 @@ const Counter = () => {
       return `${spaces}${_valAsPercent}%`
     },
     increment: () => { value = value * INCREMENTAL_VALUE; return value },
-    getChoice: () => {
-      return Utils.chanceRoll(1)
+    getChoice: (seed = 1) => {
+      const _rndValue = Math.round(Math.random() * 99)
+      if (__DEV__) {
+        console.log(`${_rndValue} === ${seed} : ${_rndValue === seed}`)
+      }
+      return _rndValue === seed
     }
   }
 }
@@ -63,6 +68,7 @@ export default class extends Group {
     )
     this.addChild(text)
     const chance = new Counter()
+    this.chanceSeed = Math.round(Math.random() * 100)
     text.anchor.setTo(1, 0.5)
     text.x = this.bg.right - 20
 
@@ -98,7 +104,8 @@ export default class extends Group {
 
     this.increment = () => {
       const step = this.steps.increment()
-      let choice = chance.getChoice()
+      let choice = chance.getChoice(this.chanceSeed)
+      console.log(choice)
       if (choice) this.onEvent.dispatch()
       stepCounter.setText(`${step}`)
       // eventsText.setText(choice ? 'СОБЫТИЕ!' : 'событий нет')
