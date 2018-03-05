@@ -58,7 +58,7 @@ export default class extends Phaser.State {
     this.background = new Background(this.game)
 
     this.layer4 = this.game.add.group()
-    this.layer4.y = this.game.world.height - 100
+    this.layer4.y = this.game.world.height * 0.85
 
     this.eventObservers = []
     let _bgevents = Phaser.ArrayUtils.shuffle([...BGEVENTS])
@@ -81,7 +81,7 @@ export default class extends Phaser.State {
     this.hero = new Hero({
       game: this.game,
       x: 70,
-      y: this.game.camera.height * 0.87})
+      y: this.game.camera.height * 0.83})
 
     this.hero.anim['go'].onComplete.add(() => {
       this.nextStepReady
@@ -176,9 +176,12 @@ export default class extends Phaser.State {
       onClick()
     }, this)
 
-    this.layer4.y += this.game.camera.height * 0.1
+    // this.layer4.y += this.game.camera.height * 0.1
 
     this.game.add.existing(new Mute(this.game))
+
+    this.logo = this.game.add.sprite(0,0,'logo')
+    this.logo.scale.setTo(0.5)
 
     this.tiker = this.game.add.existing(new Tiker(this.game))
     this.tiker.x = 0

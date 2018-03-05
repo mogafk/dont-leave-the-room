@@ -40,7 +40,7 @@ export default (game) => {
   const vScale = Math.min(1, game.camera.height / 500)
   const doma = game.add.tileSprite(
     0,
-    game.camera.height * 0.65,
+    game.camera.height * 0.55,
     game.world.width,
     234 * vScale * 0.9,
     'houses-2-1'
@@ -50,7 +50,7 @@ export default (game) => {
 
   const doma2 = game.add.tileSprite(
     0,
-    game.camera.height * 0.79,
+    game.camera.height * 0.68,
     game.world.width,
     265 * vScale,
     'houses-2-2'
@@ -74,7 +74,7 @@ export default (game) => {
   create3LayerHome()
 
   game.add.existing(layer3)
-  layer3.y = game.camera.height * 0.85
+  layer3.y = game.camera.height * 0.75
   layer3.update = () => {
     const _s = layer3.getTop()
     if (layer3.getTop()) {
@@ -87,7 +87,7 @@ export default (game) => {
 
   const musor = game.add.tileSprite(
     0,
-    game.world.height - 80,
+    game.world.height * 0.9,
     game.world.width,
     90,
     'musor'

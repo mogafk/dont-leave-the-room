@@ -51,6 +51,7 @@ export default class extends Phaser.State {
     this.game.load.image('ui-plashka', 'ui/plashka.png')
     this.game.load.image('ui-tiker', 'ui/tiker.png')
     this.game.load.image('button-restart', 'ui/restart.png')
+    this.game.load.image('logo', 'logo.png')
 
     this.game.load.audio('main-theme', ['sound/main-theme.mp3', 'sound/main-theme.ogg'])
     this.game.load.audio('machine-gun', ['sound/machine-gun-loop.mp3', 'sound/machine-gun-loop.ogg'])
