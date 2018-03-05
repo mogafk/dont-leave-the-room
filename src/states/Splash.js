@@ -1,5 +1,6 @@
 import { State } from 'phaser'
 // import { centerGameObjects } from '../utils'
+import Mute from './Game/sprites/Mute'
 
 export default class extends State {
   init () {}
@@ -11,9 +12,11 @@ export default class extends State {
     this.game.load.baseURL = '/dont_leave_room/assets/'
     // this.game.load.image('splash-screen', './splash.png')
     // this.game.load.atlasJSONArray('splash-button', './ui/splash-button.png', './ui/splash-button.json')
+    // this.game.load.atlasJSONArray('button-mute', './ui/button-mute.png', './ui/button-mute.json')
 
     this.game.load.image('splash-screen', 'splash.png')
     this.game.load.atlasJSONArray('splash-button', 'ui/splash-button.png', 'ui/splash-button.json')
+    this.game.load.atlasJSONArray('button-mute', 'ui/button-mute.png', 'ui/button-mute.json')
   }
 
   create () {
@@ -35,5 +38,7 @@ export default class extends State {
     const _scaleBH = this.game.camera.height / button1.height
     button1.scale.setTo(Math.max(_scaleBW, _scaleBH) * 0.15)
     // button1.scale.setTo(0.25)
+
+    this.game.add.existing(new Mute(this.game))
   }
 }

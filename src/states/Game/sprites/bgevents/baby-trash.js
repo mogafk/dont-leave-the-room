@@ -57,7 +57,7 @@ export default class extends Sprite {
     //   this.sfx.play('', 0, 1, true)
     // }, this)
 
-    this.sfx.play('', 0, 0.1, true)
+    this.sfx.play('', 0, 0.2, true)
 
     this.game.add.existing(this)
   }

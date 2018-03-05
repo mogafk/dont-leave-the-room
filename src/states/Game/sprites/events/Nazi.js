@@ -14,6 +14,12 @@ export default class extends Sprite {
 
     this.pointOfAction = new Point(this.game.world.centerX, this.game.world.centerY)
 
+    this.story = {
+      title: 'Дело астраханских неонацистов, избивавших прохожих за неславянскую внешность, передано в суд',
+      date: '27 апреля 2015',
+      text: 'Согласно материалам дела, 20-летний житель Астрахани по имени Александр создал группировку в июне 2012 года. Ее участники — в основном студенты — вели здоровый образ жизни, занимались спортом, изучали ножевой бой. Нападения совершали небольшими группами по два-три человека, выбирая жертв среди «нерусских».'
+    }
+
     const subject = hero || new Hero({ game: this.game, x: 0, y: this.game.world.centerY })
     this.toDebug = subject
     // subject.anim['walk'].play()

@@ -36,9 +36,9 @@ if(__DEV__) {
   window.game = new Game()
   window.game.state.start('Splash');
 } else {
-  window.startGame = (containerId) => {
+  window.startGame = (containerId, stage) => {
     const game = new Game(containerId);
-    game.state.start('Splash');
+    game.state.start(stage);
     return game;
   };
 }

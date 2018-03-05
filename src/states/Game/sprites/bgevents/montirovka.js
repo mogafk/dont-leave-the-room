@@ -10,6 +10,9 @@ export default class extends Sprite {
 
     this.walkaway = false
 
+    this.sfx = this.game.add.audio('glass-smash')
+    this.sfx.allowMultiple = true
+
     const car = new Animated({
       game: this.game,
       x: 0,
@@ -51,6 +54,7 @@ export default class extends Sprite {
     }, this)
 
     man.anim['hit'].onComplete.add(() => {
+      setTimeout(() => { this.sfx.play() }, 300)
       car.anim['montirovka_car'].play()
       man.anim['goAfterHit'].play()
     }, this)
