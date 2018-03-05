@@ -6,6 +6,8 @@ export default class extends Phaser.Sprite {
     super(props)
 
     this.onDestroyed = new Phaser.Signal()
+    this.storyMessage = 'Пермяки задержали сотрудника полиции, насиловавшего женщину у скульптуры «Счастье не за горами»'
+    this.activated = false
 
     const bg = this.game.add.sprite(0, 0, 'houses', 'sight-2')
     bg.anchor.setTo(0, 1)
@@ -30,5 +32,9 @@ export default class extends Phaser.Sprite {
     this.addChild(bg)
 
     this.game.add.existing(this)
+  }
+
+  play () {
+    this.activated = true
   }
 }

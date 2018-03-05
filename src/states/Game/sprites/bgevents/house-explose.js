@@ -9,6 +9,7 @@ export default class extends Sprite {
     this.onDestroyed = new Signal()
     this.sfx = this.game.add.audio('explosion')
     this.sfx.allowMultiple = true
+    this.storyMessage = '«Иду мимо, и вдруг — взрыв» — случайный прохожий едва не пострадал при взрыве в жилом доме в Петербурге'
 
     this.anchor.setTo(0, 1)
     this.house0 = new Sprite(this.game, 0, 0, 'explosed-0')

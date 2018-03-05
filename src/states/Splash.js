@@ -1,4 +1,4 @@
-import { State } from 'phaser'
+import { State, Cache } from 'phaser'
 // import { centerGameObjects } from '../utils'
 import Mute from './Game/sprites/Mute'
 
@@ -8,6 +8,10 @@ export default class extends State {
   preload () {
     // centerGameObjects([this.loaderBg, this.loaderBar])
     // this.load.setPreloadSprite(this.loaderBar)
+    // this.game.cache = new Cache(this.game)
+    // this.game.load.reset()
+    // this.game.load.removeAll()
+
     this.game.load.baseURL = './assets/'
     this.game.load.image('splash-screen', './splash.png')
     this.game.load.atlasJSONArray('splash-button', './ui/splash-button.png', './ui/splash-button.json')

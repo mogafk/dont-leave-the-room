@@ -7,6 +7,8 @@ export default class extends Sprite {
     this.onDestroyed = new Signal()
     this.sfx = this.game.add.audio('crying-baby')
     this.sfx.allowMultiple = true
+    this.storyMessage = 'Чебоксарах прохожие нашли новорожденную девочку в мусорном контейнере'
+    this.activated = false
 
     //  добавляю мусорный бак
     this.trashCan = new Sprite(this.game, this.x, this.y, 'trashcan')
@@ -14,7 +16,7 @@ export default class extends Sprite {
     this.trashCan.pivot.setTo(1, 0.5)
     this.addChild(this.trashCan)
     this.anchor.setTo(0.5, 1)
-    this.pivot.setTo(1, 0.5)
+    this.pivot.setTo(0, 0.5)
 
     this.trashCan.outOfCameraBoundsKill = true
     this.trashCan.autoCull = true
@@ -62,5 +64,7 @@ export default class extends Sprite {
     this.game.add.existing(this)
   }
 
-  play () {}
+  play () {
+    this.activated = true
+  }
 }

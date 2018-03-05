@@ -12,7 +12,7 @@ export default class extends Animated {
 
     this.addAnimation({name: 'brokenleg', length: 15, speed: 12})
     this.addAnimation({name: 'death', length: 11, speed: 24})
-    this.addAnimation({name: 'go', length: 21, speed: 24})
+    this.addAnimation({name: 'go', length: 23, speed: 24})
     this.addAnimation({name: 'walk', prefix: `go_`, offset: 3, length: 14, speed: 24, loop: true})
     this.addAnimation({name: 'stop', prefix: `go_`, offset: 14, length: 21, speed: 24})
     this.addAnimation({name: 'photo', length: 12, speed: 12})

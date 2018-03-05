@@ -7,7 +7,7 @@ export default class extends Sprite {
 
     this.activated = false
     this.onDestroyed = new Signal()
-
+    this.storyMessage = 'Прохожий выместил злобу на чужом автомобиле монтировкой'
     this.walkaway = false
 
     this.sfx = this.game.add.audio('glass-smash')

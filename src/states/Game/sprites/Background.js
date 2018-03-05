@@ -29,7 +29,7 @@ export default (game) => {
 
   const zabor = game.add.tileSprite(
     0,
-    180,
+    game.camera.height / 2.8,
     game.world.width,
     350 / 4,
     'background',
@@ -37,21 +37,27 @@ export default (game) => {
   )
   zabor.tileScale.setTo(0.25)
 
+  const vScale = Math.min(1, game.camera.height / 500)
   const doma = game.add.tileSprite(
     0,
-    60 + 15,
+    game.camera.height * 0.65,
     game.world.width,
-    234,
+    234 * vScale * 0.9,
     'houses-2-1'
   )
+  doma.anchor.setTo(0, 1)
+  doma.tileScale.setTo(vScale * 0.9)
+
   const doma2 = game.add.tileSprite(
     0,
-    80 + 5,
+    game.camera.height * 0.79,
     game.world.width,
-    265,
+    265 * vScale,
     'houses-2-2'
   )
-  doma2.tilePosition.x += 200
+  doma2.anchor.setTo(0, 1)
+  doma2.tileScale.setTo(vScale)
+  // doma2.tilePosition.x += 200
   // zabor.tileScale.setTo(0.25)
 
   const houseNamesArray = [
@@ -68,7 +74,7 @@ export default (game) => {
   create3LayerHome()
 
   game.add.existing(layer3)
-  layer3.y = game.camera.height - 100
+  layer3.y = game.camera.height * 0.85
   layer3.update = () => {
     const _s = layer3.getTop()
     if (layer3.getTop()) {
@@ -91,9 +97,9 @@ export default (game) => {
     move: (x = 1) => {
       layer1.move()
       layer2.move()
-      zabor.tilePosition.x -= velocity * 9
-      doma.tilePosition.x -= velocity * 2.5
-      doma2.tilePosition.x -= velocity * 2.9
+      zabor.tilePosition.x -= velocity * 9 
+      doma.tilePosition.x -= velocity * 2.5 * (Math.max(1, 1 / vScale))
+      doma2.tilePosition.x -= velocity * 2.9 * (Math.max(1, 1 / vScale))
       layer3.addAll('x', -1 * velocity * 3.3)
       musor.tilePosition.x -= velocity * 3.85
     }
